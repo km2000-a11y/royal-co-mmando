@@ -1,3 +1,4 @@
+#This is my Main script!
 extends Node
 
 @onready var lan_ui = $LANUI
