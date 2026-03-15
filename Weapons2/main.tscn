@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://dljkh0n7qd2un"]
+
+[ext_resource type="PackedScene" uid="uid://bk5nj3mo2x4pf" path="res://Weapons2/environment.tscn" id="1_rrpva"]
+[ext_resource type="Script" uid="uid://cp4k2e5x6xnws" path="res://Weapons2/main.gd" id="1_yftb0"]
+[ext_resource type="PackedScene" uid="uid://cr3jcyli0yhhk" path="res://Weapons2/HUD.tscn" id="2_yftb0"]
+[ext_resource type="PackedScene" uid="uid://b7cjd0bwpx4qq" path="res://Weapons2/Crosshair.tscn" id="3_tpsl6"]
+[ext_resource type="Script" uid="uid://14gyxp2p7gh3" path="res://Weapons2/spawn_points.gd" id="5_tpsl6"]
+[ext_resource type="Script" uid="uid://dsuswea4kjj82" path="res://Weapons2/lan_menu.gd" id="6_imgw4"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_yftb0")
+
+[node name="HUD" parent="." instance=ExtResource("2_yftb0")]
+
+[node name="Crosshair" parent="." instance=ExtResource("3_tpsl6")]
+
+[node name="Map" parent="." instance=ExtResource("1_rrpva")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.782074, 0, -5.99631)
+script = ExtResource("5_tpsl6")
+
+[node name="SpawnPoints" type="Node3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.782074, 0, 5.99631)
+
+[node name="GuardSpawn" type="Marker3D" parent="Map/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4242, 0.11077, -30.991)
+
+[node name="GangsterSpawn" type="Marker3D" parent="Map/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5352, 0, 100)
+
+[node name="LANUI" type="CanvasLayer" parent="."]
+script = ExtResource("6_imgw4")
+
+[node name="LANMenu" type="Control" parent="LANUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HostButton" type="Button" parent="LANUI/LANMenu"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "HOST GAME
+"
+
+[node name="JoinButton" type="Button" parent="LANUI/LANMenu"]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 93.0
+offset_bottom = 63.0
+text = "JOIN Game"
+
+[node name="IPEntry" type="LineEdit" parent="LANUI/LANMenu"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 64.0
+offset_right = 129.0
+offset_bottom = 95.0
+theme_override_font_sizes/font_size = 16
+placeholder_text = "Enter IP of Host"
+expand_to_text_length = true
+emoji_menu_enabled = false

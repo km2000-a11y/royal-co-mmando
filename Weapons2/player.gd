@@ -1,0 +1,203 @@
+extends CharacterBody3D
+
+# --- Movement Settings ---
+const WALK_SPEED := 5.0
+const SPRINT_SPEED := 8.0
+const JUMP_VELOCITY := 4.5
+const MOUSE_SENS := 0.01
+const CONTROLLER_SENS := 2.0
+
+# --- Player State (local + visual sync) ---
+@export var hp := 180
+@export var yaw := 0.0
+@export var pitch := 0.0
+@export var role := ""
+
+@export var sync_position: Vector3
+@export var sync_rotation: Vector3
+@export var weapon_index := 0
+
+var is_local := false
+
+# --- Nodes ---
+@onready var camera_pivot = $CameraPivot
+@onready var camera = $CameraPivot/Camera3D
+@onready var weapon_anchor = $CameraPivot/Camera3D/WeaponHolder/WeaponAnchor
+
+# --- Weapon Pool ---
+var weapon_pool: Array[PackedScene] = [
+	preload("res://Weapons2/g18.tscn"),
+	preload("res://Weapons2/desert eagle.tscn"),
+	preload("res://Weapons2/usp45.tscn"),
+	preload("res://Weapons2/p250.tscn"),
+	preload("res://Weapons2/five seven.tscn"),
+
+	preload("res://Weapons2/m3a1 grease gun.tscn"),
+	preload("res://Weapons2/mac10.tscn"),
+	preload("res://Weapons2/p90.tscn"),
+	preload("res://Weapons2/mp5.tscn"),
+
+	preload("res://Weapons2/akm.tscn"),
+	preload("res://Weapons2/m4a1.tscn"),
+	preload("res://Weapons2/g36.tscn"),
+	preload("res://Weapons2/aug a1.tscn"),
+	preload("res://Weapons2/scar l.tscn"),
+	preload("res://Weapons2/famas f1.tscn"),
+	preload("res://Weapons2/ak4.tscn"),
+
+	preload("res://Weapons2/awm.tscn"),
+
+	preload("res://Weapons2/negev lmg.tscn"),
+	preload("res://Weapons2/rpk.tscn"),
+
+	preload("res://Weapons2/spas12.tscn"),
+
+	preload("res://Weapons2/knife.tscn"),
+	preload("res://Weapons2/katana.tscn")
+]
+
+
+func _enter_tree():
+	print("PLAYER ENTERED TREE:", name, " AUTH:", get_multiplayer_authority())
+
+
+func _ready():
+	# Local = the peer that owns this node
+	is_local = is_multiplayer_authority()
+	print("PLAYER READY:", name, " LOCAL:", is_local, " AUTH:", get_multiplayer_authority(), " ID:", multiplayer.get_unique_id())
+
+	# Local player camera ON, remote OFF
+	camera.current = is_local
+	if is_local:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		# Local chooses weapon index (for now, random)
+		weapon_index = randi() % weapon_pool.size()
+
+	await get_tree().process_frame
+	_spawn_weapon_from_index()
+
+
+# -------------------------------
+# INPUT HANDLING (LOCAL ONLY)
+# -------------------------------
+func _unhandled_input(event: InputEvent) -> void:
+	if not is_local:
+		return
+
+	if Input.is_action_just_pressed("pause_menu"):
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		return
+
+	# Mouse look
+	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+		yaw -= event.relative.x * MOUSE_SENS
+		pitch -= event.relative.y * MOUSE_SENS
+		pitch = clamp(pitch, deg_to_rad(-40), deg_to_rad(60))
+
+		camera_pivot.rotation.y = yaw
+		camera.rotation.x = pitch
+
+
+# -------------------------------
+# PHYSICS
+# -------------------------------
+func _physics_process(delta: float) -> void:
+	if is_local:
+		_handle_look_controller(delta)
+		_handle_movement(delta)
+		_check_death()
+
+		move_and_slide()
+
+		# For now, just copy to sync vars (you can later RPC these)
+		sync_position = global_transform.origin
+		sync_rotation = rotation
+	else:
+		# Remote visual update
+		global_transform.origin = sync_position
+		rotation = sync_rotation
+
+
+# -------------------------------
+# CONTROLLER LOOK
+# -------------------------------
+func _handle_look_controller(delta: float):
+	if not is_local:
+		return
+
+	var joy := Input.get_vector("look_left", "look_right", "look_up", "look_down")
+	if joy.length() > 0.1:
+		yaw -= joy.x * CONTROLLER_SENS * delta
+		pitch -= joy.y * CONTROLLER_SENS * delta
+		pitch = clamp(pitch, deg_to_rad(-40), deg_to_rad(60))
+
+		camera_pivot.rotation.y = yaw
+		camera.rotation.x = pitch
+
+
+# -------------------------------
+# MOVEMENT + SPRINT
+# -------------------------------
+func _handle_movement(delta: float):
+	if not is_local:
+		return
+
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var direction: Vector3 = (camera_pivot.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+
+	var speed := WALK_SPEED
+	if Input.is_action_pressed("sprint") and input_dir.y < -0.1:
+		speed = SPRINT_SPEED
+
+	if direction != Vector3.ZERO:
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
+	else:
+		velocity.x = move_toward(velocity.x, 0, WALK_SPEED)
+		velocity.z = move_toward(velocity.z, 0, WALK_SPEED)
+
+
+# -------------------------------
+# DEATH CHECK
+# -------------------------------
+func _check_death():
+	if hp <= 0:
+		_respawn()
+
+
+# -------------------------------
+# RESPAWN LOGIC
+# -------------------------------
+func _respawn():
+	get_tree().quit()
+
+
+# -------------------------------
+# WEAPON HANDLING
+# -------------------------------
+func _spawn_weapon_from_index():
+	if weapon_index < 0 or weapon_index >= weapon_pool.size():
+		return
+	var weapon_scene := weapon_pool[weapon_index]
+	receive_weapon(weapon_scene)
+
+
+func receive_weapon(weapon_scene: PackedScene):
+	if weapon_anchor == null:
+		return
+
+	for c in weapon_anchor.get_children():
+		c.queue_free()
+
+	var weapon = weapon_scene.instantiate()
+	weapon_anchor.add_child(weapon)
+	weapon.global_transform = weapon_anchor.global_transform

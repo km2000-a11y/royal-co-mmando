@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=3 uid="uid://cr3jcyli0yhhk"]
+
+[ext_resource type="Script" uid="uid://deww25bel35y2" path="res://Weapons2/fps_meter.gd" id="1_k5de2"]
+[ext_resource type="Script" uid="uid://djw3jm4pmenio" path="res://Weapons2/ammo_counter.gd" id="1_ne771"]
+[ext_resource type="Script" uid="uid://mpoym0bdh1nd" path="res://Weapons2/ram_meter.gd" id="2_efote"]
+[ext_resource type="Script" uid="uid://7rltptd1hfef" path="res://Weapons2/vram_meter.gd" id="3_vow1y"]
+[ext_resource type="Script" uid="uid://b2ar4c33w7ova" path="res://Weapons2/frame_time_meter.gd" id="5_xxqia"]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AmmoCounter" type="Label" parent="Control" groups=["ammo_ui", "weapon"]]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 4.0
+anchor_bottom = 1.625
+theme_override_font_sizes/font_size = 16
+text = "AMMO: "
+script = ExtResource("1_ne771")
+
+[node name="FPSMeter" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 2.69
+anchor_right = 3.025
+anchor_bottom = 4.7
+offset_left = -5.0
+offset_top = -42.6
+offset_right = -5.0
+offset_bottom = -61.0
+theme_override_font_sizes/font_size = 16
+text = "Frames per second: "
+script = ExtResource("1_k5de2")
+
+[node name="RAMMeter" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 4.225
+anchor_right = 3.425
+anchor_bottom = 5.275
+offset_left = 2.0
+offset_top = -45.0
+offset_right = 2.0
+offset_bottom = -45.0
+theme_override_font_sizes/font_size = 16
+text = "RAM:"
+script = ExtResource("2_efote")
+
+[node name="VRAMMeter" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 5.475
+anchor_right = 2.875
+anchor_bottom = 6.525
+offset_top = -38.0
+offset_bottom = -38.0
+theme_override_font_sizes/font_size = 16
+text = "Video RAM:"
+script = ExtResource("3_vow1y")
+
+[node name="FrameTimeMeter" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 6.275
+anchor_right = 2.35
+anchor_bottom = 6.712
+offset_left = -4.0
+offset_top = -25.0
+offset_right = -4.0
+offset_bottom = -9.48001
+text = "Frame time:"
+script = ExtResource("5_xxqia")

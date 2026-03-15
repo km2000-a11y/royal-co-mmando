@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyypttor8c3sl"]
+
+[ext_resource type="Script" uid="uid://ra8scl1mk8r8" path="res://Weapons2/dummy.gd" id="1_ibwae"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hsydt"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ibwae"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_ibwae")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.947057, 0)
+mesh = SubResource("CapsuleMesh_hsydt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.941954, 0)
+shape = SubResource("CapsuleShape3D_ibwae")
