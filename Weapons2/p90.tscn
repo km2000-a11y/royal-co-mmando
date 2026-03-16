@@ -1,8 +1,8 @@
 [gd_scene load_steps=34 format=4 uid="uid://68vxo2ky6gfy"]
 
 [ext_resource type="Script" uid="uid://eo3gkr7k4636" path="res://Weapons2/weapons.gd" id="1_668nf"]
-[ext_resource type="AudioStream" uid="uid://fw4mox77mb07" path="res://Weapons2/gunshot.mp3" id="2_dtics"]
-[ext_resource type="AudioStream" uid="uid://brhlh7n3qkgft" path="res://Weapons2/reload.mp3" id="3_tkibe"]
+[ext_resource type="AudioStream" uid="uid://dg2pfqdjm6ym0" path="res://Weapons2/gunshot.mp3" id="2_dtics"]
+[ext_resource type="AudioStream" uid="uid://5mor4xmri1pe" path="res://Weapons2/reload.mp3" id="3_tkibe"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gfsck"]
 resource_name = "FN_P90_1_Material_10"
@@ -449,6 +449,7 @@ mesh = SubResource("ArrayMesh_a768v")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_dtics")
 max_polyphony = 8
+bus = &"Gunshots"
 
 [node name="ReloadPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_tkibe")

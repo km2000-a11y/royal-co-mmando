@@ -1,8 +1,8 @@
 [gd_scene load_steps=25 format=4 uid="uid://b2fisv4hrtm8l"]
 
 [ext_resource type="Script" uid="uid://eo3gkr7k4636" path="res://Weapons2/weapons.gd" id="1_wfgpe"]
-[ext_resource type="AudioStream" uid="uid://fw4mox77mb07" path="res://Weapons2/gunshot.mp3" id="2_x63g6"]
-[ext_resource type="AudioStream" uid="uid://brhlh7n3qkgft" path="res://Weapons2/reload.mp3" id="3_igf5s"]
+[ext_resource type="AudioStream" uid="uid://dg2pfqdjm6ym0" path="res://Weapons2/gunshot.mp3" id="2_x63g6"]
+[ext_resource type="AudioStream" uid="uid://5mor4xmri1pe" path="res://Weapons2/reload.mp3" id="3_igf5s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_geimx"]
 resource_name = "HK_G3_1_Material_4"
@@ -322,6 +322,7 @@ mesh = SubResource("ArrayMesh_qdtbr")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_x63g6")
+bus = &"Gunshots"
 
 [node name="ReloadPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_igf5s")

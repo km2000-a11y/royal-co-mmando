@@ -1,8 +1,8 @@
 [gd_scene load_steps=33 format=4 uid="uid://ddl7in71ywwxc"]
 
 [ext_resource type="Script" uid="uid://eo3gkr7k4636" path="res://Weapons2/weapons.gd" id="1_q7mdq"]
-[ext_resource type="AudioStream" uid="uid://fw4mox77mb07" path="res://Weapons2/gunshot.mp3" id="2_ug8er"]
-[ext_resource type="AudioStream" uid="uid://brhlh7n3qkgft" path="res://Weapons2/reload.mp3" id="3_6aluu"]
+[ext_resource type="AudioStream" uid="uid://dg2pfqdjm6ym0" path="res://Weapons2/gunshot.mp3" id="2_ug8er"]
+[ext_resource type="AudioStream" uid="uid://5mor4xmri1pe" path="res://Weapons2/reload.mp3" id="3_6aluu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uw3c6"]
 resource_name = "FN_SCAR-L_1_Material_5"
@@ -446,6 +446,7 @@ mesh = SubResource("ArrayMesh_suyae")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_ug8er")
 max_polyphony = 8
+bus = &"Gunshots"
 
 [node name="ReloadPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_6aluu")

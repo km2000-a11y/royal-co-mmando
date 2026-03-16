@@ -1,8 +1,8 @@
 [gd_scene load_steps=31 format=4 uid="uid://cf2sai6p2llfw"]
 
-[ext_resource type="AudioStream" uid="uid://fw4mox77mb07" path="res://Weapons2/gunshot.mp3" id="1_sa2ee"]
+[ext_resource type="AudioStream" uid="uid://dg2pfqdjm6ym0" path="res://Weapons2/gunshot.mp3" id="1_sa2ee"]
 [ext_resource type="Script" uid="uid://eo3gkr7k4636" path="res://Weapons2/weapons.gd" id="1_vneyt"]
-[ext_resource type="AudioStream" uid="uid://brhlh7n3qkgft" path="res://Weapons2/reload.mp3" id="2_vneyt"]
+[ext_resource type="AudioStream" uid="uid://5mor4xmri1pe" path="res://Weapons2/reload.mp3" id="2_vneyt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5bkoo"]
 resource_name = "Desert_Eagle_1_Material_2"
@@ -355,7 +355,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_4otpb")
 
 [node name="Sketchfab_Scene" type="Node3D" groups=["weapon"]]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("1_vneyt")
 DAMAGE = 80
 RANGE = 50.0
@@ -402,6 +402,7 @@ mesh = SubResource("ArrayMesh_lb1j5")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("1_sa2ee")
+bus = &"Gunshots"
 
 [node name="ReloadPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_vneyt")

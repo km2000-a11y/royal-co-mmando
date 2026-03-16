@@ -1,8 +1,8 @@
 [gd_scene load_steps=43 format=4 uid="uid://c7oe7guyk0l7c"]
 
 [ext_resource type="Script" uid="uid://eo3gkr7k4636" path="res://Weapons2/weapons.gd" id="1_tnovi"]
-[ext_resource type="AudioStream" uid="uid://fw4mox77mb07" path="res://Weapons2/gunshot.mp3" id="2_amrb6"]
-[ext_resource type="AudioStream" uid="uid://brhlh7n3qkgft" path="res://Weapons2/reload.mp3" id="3_tnovi"]
+[ext_resource type="AudioStream" uid="uid://dg2pfqdjm6ym0" path="res://Weapons2/gunshot.mp3" id="2_amrb6"]
+[ext_resource type="AudioStream" uid="uid://5mor4xmri1pe" path="res://Weapons2/reload.mp3" id="3_tnovi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_exavo"]
 resource_name = "Steyr_AUG_A1_2_Glass_1"
@@ -513,7 +513,6 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_g3xhm")
 
 [node name="Sketchfab_Scene" type="Node3D" groups=["ammo_ui", "weapon"]]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("1_tnovi")
 NAME = "AUG A1"
 COUNTRY_OF_ORIGIN = "Austria"
@@ -567,6 +566,7 @@ mesh = SubResource("ArrayMesh_5s2p1")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_amrb6")
 max_polyphony = 8
+bus = &"Gunshots"
 
 [node name="ReloadPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_tnovi")

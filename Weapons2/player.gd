@@ -51,10 +51,7 @@ var weapon_pool: Array[PackedScene] = [
 	preload("res://Weapons2/negev lmg.tscn"),
 	preload("res://Weapons2/rpk.tscn"),
 
-	preload("res://Weapons2/spas12.tscn"),
-
-	preload("res://Weapons2/knife.tscn"),
-	preload("res://Weapons2/katana.tscn")
+	preload("res://Weapons2/spas12.tscn")
 ]
 
 

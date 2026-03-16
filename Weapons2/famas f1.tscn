@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=4 uid="uid://csx6qhd6gbmb3"]
 
 [ext_resource type="Script" uid="uid://eo3gkr7k4636" path="res://Weapons2/weapons.gd" id="1_x2qrw"]
-[ext_resource type="AudioStream" uid="uid://brhlh7n3qkgft" path="res://Weapons2/reload.mp3" id="3_pj1yd"]
+[ext_resource type="AudioStream" uid="uid://5mor4xmri1pe" path="res://Weapons2/reload.mp3" id="3_pj1yd"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a1flt"]
 resource_name = "Cube_FAMAS_1_Material_2"
@@ -241,6 +241,7 @@ mesh = SubResource("ArrayMesh_dqy7h")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamMP3_4vskd")
 max_polyphony = 4
+bus = &"Gunshots"
 
 [node name="ReloadPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_pj1yd")

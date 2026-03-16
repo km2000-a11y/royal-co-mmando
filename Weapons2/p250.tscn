@@ -1,8 +1,8 @@
 [gd_scene load_steps=22 format=4 uid="uid://c0b3imo6h52c8"]
 
 [ext_resource type="Script" uid="uid://eo3gkr7k4636" path="res://Weapons2/weapons.gd" id="1_865gp"]
-[ext_resource type="AudioStream" uid="uid://fw4mox77mb07" path="res://Weapons2/gunshot.mp3" id="2_bvbap"]
-[ext_resource type="AudioStream" uid="uid://brhlh7n3qkgft" path="res://Weapons2/reload.mp3" id="3_7pwdg"]
+[ext_resource type="AudioStream" uid="uid://dg2pfqdjm6ym0" path="res://Weapons2/gunshot.mp3" id="2_bvbap"]
+[ext_resource type="AudioStream" uid="uid://5mor4xmri1pe" path="res://Weapons2/reload.mp3" id="3_7pwdg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uvle7"]
 resource_name = "SIG_Sauer_P250_1_Material_4"
@@ -278,6 +278,7 @@ mesh = SubResource("ArrayMesh_uopn1")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_bvbap")
+bus = &"Gunshots"
 
 [node name="ReloadPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_7pwdg")
