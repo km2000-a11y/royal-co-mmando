@@ -1,8 +1,8 @@
 [gd_scene load_steps=28 format=4 uid="uid://cbfuunjv68ney"]
 
 [ext_resource type="Script" uid="uid://eo3gkr7k4636" path="res://Weapons2/weapons.gd" id="1_5cju6"]
-[ext_resource type="AudioStream" uid="uid://fw4mox77mb07" path="res://Weapons2/gunshot.mp3" id="2_g6c1i"]
-[ext_resource type="AudioStream" uid="uid://brhlh7n3qkgft" path="res://Weapons2/reload.mp3" id="3_x1i2p"]
+[ext_resource type="AudioStream" uid="uid://dg2pfqdjm6ym0" path="res://Weapons2/gunshot.mp3" id="2_g6c1i"]
+[ext_resource type="AudioStream" uid="uid://5mor4xmri1pe" path="res://Weapons2/reload.mp3" id="3_x1i2p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00cnx"]
 resource_name = "Cube_G36_1_Material_4"
