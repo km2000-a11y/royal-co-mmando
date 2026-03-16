@@ -4,7 +4,7 @@ extends CharacterBody3D
 const WALK_SPEED := 5.0
 const SPRINT_SPEED := 8.0
 const JUMP_VELOCITY := 4.5
-const MOUSE_SENS := 0.01
+const MOUSE_SENS := 0.02
 const CONTROLLER_SENS := 2.0
 
 # --- Player State (local + visual sync) ---

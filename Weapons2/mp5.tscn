@@ -419,6 +419,7 @@ bus = &"Gunshots"
 
 [node name="ReloadPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_smhkn")
+bus = &"Reload"
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.570929, 0.0944222, 0)
