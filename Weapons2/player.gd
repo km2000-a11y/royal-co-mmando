@@ -4,8 +4,8 @@ extends CharacterBody3D
 const WALK_SPEED := 5.0
 const SPRINT_SPEED := 8.0
 const JUMP_VELOCITY := 4.5
-const MOUSE_SENS := 0.02
-const CONTROLLER_SENS := 2.0
+var mouse_sens := 0.01
+var controller_sens := 2.5
 
 # --- Player State (local + visual sync) ---
 @export var hp := 180
@@ -31,6 +31,7 @@ var weapon_pool: Array[PackedScene] = [
 	preload("res://Weapons2/usp45.tscn"),
 	preload("res://Weapons2/p250.tscn"),
 	preload("res://Weapons2/five seven.tscn"),
+	preload("res://Weapons2/makarov.tscn"),
 
 	preload("res://Weapons2/m3a1 grease gun.tscn"),
 	preload("res://Weapons2/mac10.tscn"),
@@ -51,7 +52,8 @@ var weapon_pool: Array[PackedScene] = [
 	preload("res://Weapons2/negev lmg.tscn"),
 	preload("res://Weapons2/rpk.tscn"),
 
-	preload("res://Weapons2/spas12.tscn")
+	preload("res://Weapons2/spas12.tscn"),
+	preload("res://Weapons2/sawed off.tscn")
 ]
 
 
@@ -60,15 +62,12 @@ func _enter_tree():
 
 
 func _ready():
-	# Local = the peer that owns this node
 	is_local = is_multiplayer_authority()
 	print("PLAYER READY:", name, " LOCAL:", is_local, " AUTH:", get_multiplayer_authority(), " ID:", multiplayer.get_unique_id())
 
-	# Local player camera ON, remote OFF
 	camera.current = is_local
 	if is_local:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		# Local chooses weapon index (for now, random)
 		weapon_index = randi() % weapon_pool.size()
 
 	await get_tree().process_frame
@@ -82,7 +81,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not is_local:
 		return
 
-	if Input.is_action_just_pressed("pause_menu"):
+	# ESC → toggle mouse capture only
+	if event.is_action_pressed("pause_menu"):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
@@ -91,8 +91,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	# Mouse look
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		yaw -= event.relative.x * MOUSE_SENS
-		pitch -= event.relative.y * MOUSE_SENS
+		yaw -= event.relative.x * mouse_sens
+		pitch -= event.relative.y * mouse_sens
 		pitch = clamp(pitch, deg_to_rad(-40), deg_to_rad(60))
 
 		camera_pivot.rotation.y = yaw
@@ -110,11 +110,9 @@ func _physics_process(delta: float) -> void:
 
 		move_and_slide()
 
-		# For now, just copy to sync vars (you can later RPC these)
 		sync_position = global_transform.origin
 		sync_rotation = rotation
 	else:
-		# Remote visual update
 		global_transform.origin = sync_position
 		rotation = sync_rotation
 
@@ -128,8 +126,8 @@ func _handle_look_controller(delta: float):
 
 	var joy := Input.get_vector("look_left", "look_right", "look_up", "look_down")
 	if joy.length() > 0.1:
-		yaw -= joy.x * CONTROLLER_SENS * delta
-		pitch -= joy.y * CONTROLLER_SENS * delta
+		yaw -= joy.x * controller_sens * delta
+		pitch -= joy.y * controller_sens * delta
 		pitch = clamp(pitch, deg_to_rad(-40), deg_to_rad(60))
 
 		camera_pivot.rotation.y = yaw
