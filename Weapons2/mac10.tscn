@@ -283,6 +283,7 @@ max_polyphony = 8
 bus = &"Gunshots"
 
 [node name="ReloadPlayer" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0808865, -0.0689393, 0.0381954)
 stream = ExtResource("3_hbhqv")
 bus = &"Reload"
 
