@@ -326,7 +326,7 @@ shadow_mesh = SubResource("ArrayMesh_ya6dr")
 [node name="Sketchfab_Scene" type="Node3D" groups=["ammo_ui", "weapon"]]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("1_bfrq0")
-DAMAGE = 120
+DAMAGE = 150
 RANGE = 300.0
 FIRE_RATE_RPM = 45.0
 MAG_SIZE = 5
