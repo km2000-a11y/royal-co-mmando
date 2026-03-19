@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxs2y18ccneq"]
+
+[ext_resource type="Script" uid="uid://c4bt5a8ppeklj" path="res://settings_menu.gd" id="1_svoao"]
+
+[node name="SettingsMenu" type="CanvasLayer"]
+script = ExtResource("1_svoao")
+
+[node name="PanelRoot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 70.0
+offset_bottom = 57.0
+
+[node name="Panel" type="Panel" parent="PanelRoot"]
+layout_mode = 0
+offset_right = 1282.0
+offset_bottom = 718.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelRoot/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="PanelRoot/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "SETTINGS"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelRoot/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ResolutionRow" type="HBoxContainer" parent="PanelRoot/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelRoot/Panel/VBoxContainer/ResolutionRow"]
+layout_mode = 2
+text = "RESOLUTION"
+
+[node name="ResolutionSelector" type="OptionButton" parent="PanelRoot/Panel/VBoxContainer/ResolutionRow"]
+layout_mode = 2
+selected = 1
+item_count = 4
+popup/item_0/text = "600p (600x1024)"
+popup/item_0/id = 0
+popup/item_1/text = "720p (720x1280)"
+popup/item_1/id = 1
+popup/item_2/text = "1080p (1080x1920)"
+popup/item_2/id = 2
+popup/item_3/text = "1440p (1440x2560)"
+popup/item_3/id = 3

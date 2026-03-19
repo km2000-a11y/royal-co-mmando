@@ -15,14 +15,11 @@ run/main_scene="uid://dljkh0n7qd2un"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
-[autoload]
-
-Settings="*res://settings.gd"
-
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/stretch/aspect="expand"
 window/vsync/vsync_mode=0
 
 [global_group]
