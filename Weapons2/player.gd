@@ -18,11 +18,15 @@ var controller_sens := 2.5
 @export var weapon_index := 0
 
 var is_local := false
+var is_paused := false   # <--- NEW
 
 # --- Nodes ---
 @onready var camera_pivot = $CameraPivot
 @onready var camera = $CameraPivot/Camera3D
 @onready var weapon_anchor = $CameraPivot/Camera3D/WeaponHolder/WeaponAnchor
+
+# Reference to Settings Menu (adjust path if needed)
+@onready var settings_menu := get_tree().root.get_node("Main/SettingsMenu")
 
 # --- Weapon Pool ---
 var weapon_pool: Array[PackedScene] = [
@@ -46,7 +50,6 @@ var weapon_pool: Array[PackedScene] = [
 	preload("res://Weapons2/famas f1.tscn"),
 	preload("res://Weapons2/ak4.tscn"),
 	preload("res://Weapons2/scout 556.tscn"),
-
 	preload("res://Weapons2/awm.tscn"),
 
 	preload("res://Weapons2/negev lmg.tscn"),
@@ -75,18 +78,33 @@ func _ready():
 
 
 # -------------------------------
+# PAUSE / SETTINGS MENU
+# -------------------------------
+func _toggle_pause() -> void:
+	is_paused = not is_paused
+
+	if is_paused:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		settings_menu.show()
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		settings_menu.hide()
+
+
+# -------------------------------
 # INPUT HANDLING (LOCAL ONLY)
 # -------------------------------
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_local:
 		return
 
-	# ESC → toggle mouse capture only
+	# Pause / Settings
 	if event.is_action_pressed("pause_menu"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		_toggle_pause()
+		return
+
+	# Ignore gameplay input while paused
+	if is_paused:
 		return
 
 	# Mouse look
@@ -103,6 +121,9 @@ func _unhandled_input(event: InputEvent) -> void:
 # PHYSICS
 # -------------------------------
 func _physics_process(delta: float) -> void:
+	if is_paused:
+		return
+
 	if is_local:
 		_handle_look_controller(delta)
 		_handle_movement(delta)
@@ -121,7 +142,7 @@ func _physics_process(delta: float) -> void:
 # CONTROLLER LOOK
 # -------------------------------
 func _handle_look_controller(delta: float):
-	if not is_local:
+	if not is_local or is_paused:
 		return
 
 	var joy := Input.get_vector("look_left", "look_right", "look_up", "look_down")
@@ -138,7 +159,7 @@ func _handle_look_controller(delta: float):
 # MOVEMENT + SPRINT
 # -------------------------------
 func _handle_movement(delta: float):
-	if not is_local:
+	if not is_local or is_paused:
 		return
 
 	if not is_on_floor():

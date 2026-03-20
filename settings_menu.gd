@@ -1,17 +1,17 @@
 extends CanvasLayer
 
 # -------------------------
-#  Resolution definitions
+#  Render scale definitions
 # -------------------------
-const RESOLUTIONS := {
-	0: Vector2i(1024, 600),
-	1: Vector2i(1280, 720),
-	2: Vector2i(1920, 1080),
-	3: Vector2i(2560, 1440)
+# Ordered from lowest → highest
+const SCALES = {
+	0: 0.25,  # Lowest
+	1: 0.5,   # Medium
+	2: 0.75,  # High
+	3: 1.0    # Full resolution
 }
 
-# Shortcut to the OptionButton
-@onready var resolution_selector := $PanelRoot/Panel/VBoxContainer/ResolutionRow/ResolutionSelector
+@onready var resolution_selector: OptionButton = $PanelRoot/Panel/VBoxContainer/ResolutionRow/ResolutionSelector
 
 
 # -------------------------
@@ -20,6 +20,7 @@ const RESOLUTIONS := {
 func _ready() -> void:
 	_populate_resolution_selector()
 	_load_settings()
+	hide()
 
 
 # -------------------------
@@ -27,18 +28,20 @@ func _ready() -> void:
 # -------------------------
 func _populate_resolution_selector() -> void:
 	resolution_selector.clear()
-	resolution_selector.add_item("600p (1024×600)")
-	resolution_selector.add_item("720p (1280×720)")
-	resolution_selector.add_item("1080p (1920×1080)")
-	resolution_selector.add_item("1440p (2560×1440)")
+	resolution_selector.add_item("25% (Lowest)")
+	resolution_selector.add_item("50% (Medium)")
+	resolution_selector.add_item("75% (High)")
+	resolution_selector.add_item("100% (Full)")
 
 
 # -------------------------
-#  Apply resolution
+#  Apply internal resolution scale
 # -------------------------
-func _apply_resolution(index: int) -> void:
-	if RESOLUTIONS.has(index):
-		get_viewport().size = RESOLUTIONS[index]
+func _apply_resolution_scale(index: int) -> void:
+	if SCALES.has(index):
+		var scale: float = SCALES[index]
+		get_viewport().scaling_3d_scale = scale
+		print("Applied render scale:", scale)
 
 
 # -------------------------
@@ -46,7 +49,7 @@ func _apply_resolution(index: int) -> void:
 # -------------------------
 func _save_settings(index: int) -> void:
 	var cfg := ConfigFile.new()
-	cfg.set_value("video", "resolution_index", index)
+	cfg.set_value("video", "scale_index", index)
 	cfg.save("user://settings.cfg")
 
 
@@ -55,14 +58,14 @@ func _load_settings() -> void:
 	if cfg.load("user://settings.cfg") != OK:
 		return
 
-	var index : int = cfg.get_value("video", "resolution_index", 2)
+	var index: int = cfg.get_value("video", "scale_index", 3)
 	resolution_selector.select(index)
-	_apply_resolution(index)
+	_apply_resolution_scale(index)
 
 
 # -------------------------
-#  Signals
+#  UI Signal
 # -------------------------
-func _on_ResolutionSelector_item_selected(index: int) -> void:
-	_apply_resolution(index)
+func _on_resolution_selector_item_selected(index: int) -> void:
+	_apply_resolution_scale(index)
 	_save_settings(index)

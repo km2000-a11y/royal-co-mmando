@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dljkh0n7qd2un"]
+[gd_scene load_steps=8 format=3 uid="uid://dljkh0n7qd2un"]
 
 [ext_resource type="PackedScene" uid="uid://bk5nj3mo2x4pf" path="res://Weapons2/environment.tscn" id="1_rrpva"]
 [ext_resource type="Script" uid="uid://cp4k2e5x6xnws" path="res://Weapons2/main.gd" id="1_yftb0"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b7cjd0bwpx4qq" path="res://Weapons2/Crosshair.tscn" id="3_tpsl6"]
 [ext_resource type="Script" uid="uid://14gyxp2p7gh3" path="res://Weapons2/spawn_points.gd" id="5_tpsl6"]
 [ext_resource type="Script" uid="uid://dsuswea4kjj82" path="res://Weapons2/lan_menu.gd" id="6_imgw4"]
+[ext_resource type="PackedScene" uid="uid://dxs2y18ccneq" path="res://SettingsMenu.tscn" id="7_imgw4"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_yftb0")
@@ -22,7 +23,7 @@ script = ExtResource("5_tpsl6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.782074, 0, 5.99631)
 
 [node name="GuardSpawn" type="Marker3D" parent="Map/SpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4242, 0.11077, -30.991)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4242, 0.11077, -37.2721)
 
 [node name="GangsterSpawn" type="Marker3D" parent="Map/SpawnPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5352, 0, 100)
@@ -62,3 +63,5 @@ theme_override_font_sizes/font_size = 16
 placeholder_text = "Enter IP of Host"
 expand_to_text_length = true
 emoji_menu_enabled = false
+
+[node name="SettingsMenu" parent="." instance=ExtResource("7_imgw4")]
