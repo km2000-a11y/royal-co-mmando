@@ -206,6 +206,15 @@ shadow_mesh = SubResource("ArrayMesh_n2mb0")
 
 [node name="Sketchfab_Scene" type="Node3D"]
 script = ExtResource("1_xr6g0")
+DAMAGE = 50
+FIRE_RATE_RPM = 330.0
+MAG_SIZE = 18
+RESERVE_MAX = 126
+RELOAD_TIME = 2.0
+RECOIL_UP = 0.2
+RECOIL_SIDE = 0.06
+NAME = "TEC9"
+COUNTRY_OF_ORIGIN = "USA"
 
 [node name="Sketchfab_model" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 2.22045e-16, 1, 0, -1, 2.22045e-16, 0, 0, 0)

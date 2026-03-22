@@ -241,7 +241,6 @@ mesh = SubResource("ArrayMesh_dqy7h")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamMP3_4vskd")
 max_polyphony = 4
-bus = &"Gunshots"
 
 [node name="ReloadPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_oixqk")

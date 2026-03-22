@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxs2y18ccneq"]
+[gd_scene load_steps=3 format=3 uid="uid://dxs2y18ccneq"]
 
 [ext_resource type="Script" uid="uid://c4bt5a8ppeklj" path="res://settings_menu.gd" id="1_svoao"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_svoao"]
 
 [node name="SettingsMenu" type="CanvasLayer"]
 script = ExtResource("1_svoao")
@@ -49,5 +51,21 @@ popup/item_2/text = "75%"
 popup/item_2/id = 2
 popup/item_3/text = "100%"
 popup/item_3/id = 3
+
+[node name="MouseSensRow" type="HBoxContainer" parent="PanelRoot/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelRoot/Panel/VBoxContainer/MouseSensRow"]
+layout_mode = 2
+text = "Mouse Sensitivity"
+
+[node name="HSlider" type="HSlider" parent="PanelRoot/Panel/VBoxContainer/MouseSensRow"]
+layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_svoao")
+min_value = 0.003
+max_value = 0.03
+step = 0.001
+value = 0.01
+tick_count = 28
 
 [connection signal="item_selected" from="PanelRoot/Panel/VBoxContainer/ResolutionRow/ResolutionSelector" to="." method="_on_resolution_selector_item_selected"]

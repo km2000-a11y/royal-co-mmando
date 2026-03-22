@@ -44,11 +44,13 @@ var weapon_pool: Array[PackedScene] = [
 	preload("res://Weapons2/p250.tscn"),
 	preload("res://Weapons2/five seven.tscn"),
 	preload("res://Weapons2/makarov.tscn"),
+	preload("res://Weapons2/tec9.tscn"),
 
 	preload("res://Weapons2/m3a1 grease gun.tscn"),
 	preload("res://Weapons2/mac10.tscn"),
 	preload("res://Weapons2/p90.tscn"),
 	preload("res://Weapons2/mp5.tscn"),
+	preload("res://Weapons2/sr2 veresk.tscn"),
 
 	preload("res://Weapons2/akm.tscn"),
 	preload("res://Weapons2/m4a1.tscn"),
@@ -64,7 +66,8 @@ var weapon_pool: Array[PackedScene] = [
 	preload("res://Weapons2/rpk.tscn"),
 
 	preload("res://Weapons2/spas12.tscn"),
-	preload("res://Weapons2/sawed off.tscn")
+	preload("res://Weapons2/sawed off.tscn"),
+	preload("")
 ]
 
 # ---------------------------------------------------------
