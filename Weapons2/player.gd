@@ -1,13 +1,18 @@
 extends CharacterBody3D
 
-# --- Movement Settings ---
+# ---------------------------------------------------------
+# MOVEMENT SETTINGS
+# ---------------------------------------------------------
 const WALK_SPEED := 5.0
 const SPRINT_SPEED := 8.0
 const JUMP_VELOCITY := 4.5
+
 var mouse_sens := 0.01
 var controller_sens := 2.5
 
-# --- Player State (local + visual sync) ---
+# ---------------------------------------------------------
+# PLAYER STATE
+# ---------------------------------------------------------
 @export var hp := 180
 @export var yaw := 0.0
 @export var pitch := 0.0
@@ -18,17 +23,20 @@ var controller_sens := 2.5
 @export var weapon_index := 0
 
 var is_local := false
-var is_paused := false   # <--- NEW
+var is_paused := false
 
-# --- Nodes ---
+# ---------------------------------------------------------
+# NODE REFERENCES
+# ---------------------------------------------------------
 @onready var camera_pivot = $CameraPivot
 @onready var camera = $CameraPivot/Camera3D
 @onready var weapon_anchor = $CameraPivot/Camera3D/WeaponHolder/WeaponAnchor
 
-# Reference to Settings Menu (adjust path if needed)
 @onready var settings_menu := get_tree().root.get_node("Main/SettingsMenu")
 
-# --- Weapon Pool ---
+# ---------------------------------------------------------
+# WEAPON POOL
+# ---------------------------------------------------------
 var weapon_pool: Array[PackedScene] = [
 	preload("res://Weapons2/g18.tscn"),
 	preload("res://Weapons2/desert eagle.tscn"),
@@ -47,7 +55,7 @@ var weapon_pool: Array[PackedScene] = [
 	preload("res://Weapons2/g36.tscn"),
 	preload("res://Weapons2/aug a1.tscn"),
 	preload("res://Weapons2/scar l.tscn"),
-	preload("res://Weapons2/famas f1.tscn"),
+	preload("res://Weapons2/vhs d.tscn"),
 	preload("res://Weapons2/ak4.tscn"),
 	preload("res://Weapons2/scout 556.tscn"),
 	preload("res://Weapons2/awm.tscn"),
@@ -59,16 +67,18 @@ var weapon_pool: Array[PackedScene] = [
 	preload("res://Weapons2/sawed off.tscn")
 ]
 
-
+# ---------------------------------------------------------
+# LIFECYCLE
+# ---------------------------------------------------------
 func _enter_tree():
 	print("PLAYER ENTERED TREE:", name, " AUTH:", get_multiplayer_authority())
 
-
 func _ready():
 	is_local = is_multiplayer_authority()
-	print("PLAYER READY:", name, " LOCAL:", is_local, " AUTH:", get_multiplayer_authority(), " ID:", multiplayer.get_unique_id())
+	print("PLAYER READY:", name, " LOCAL:", is_local, " AUTH:", get_multiplayer_authority())
 
 	camera.current = is_local
+
 	if is_local:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		weapon_index = randi() % weapon_pool.size()
@@ -76,10 +86,9 @@ func _ready():
 	await get_tree().process_frame
 	_spawn_weapon_from_index()
 
-
-# -------------------------------
-# PAUSE / SETTINGS MENU
-# -------------------------------
+# ---------------------------------------------------------
+# PAUSE MENU
+# ---------------------------------------------------------
 func _toggle_pause() -> void:
 	is_paused = not is_paused
 
@@ -90,24 +99,20 @@ func _toggle_pause() -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		settings_menu.hide()
 
-
-# -------------------------------
-# INPUT HANDLING (LOCAL ONLY)
-# -------------------------------
+# ---------------------------------------------------------
+# INPUT
+# ---------------------------------------------------------
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_local:
 		return
 
-	# Pause / Settings
 	if event.is_action_pressed("pause_menu"):
 		_toggle_pause()
 		return
 
-	# Ignore gameplay input while paused
 	if is_paused:
 		return
 
-	# Mouse look
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		yaw -= event.relative.x * mouse_sens
 		pitch -= event.relative.y * mouse_sens
@@ -116,10 +121,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera_pivot.rotation.y = yaw
 		camera.rotation.x = pitch
 
-
-# -------------------------------
+# ---------------------------------------------------------
 # PHYSICS
-# -------------------------------
+# ---------------------------------------------------------
 func _physics_process(delta: float) -> void:
 	if is_paused:
 		return
@@ -137,10 +141,9 @@ func _physics_process(delta: float) -> void:
 		global_transform.origin = sync_position
 		rotation = sync_rotation
 
-
-# -------------------------------
+# ---------------------------------------------------------
 # CONTROLLER LOOK
-# -------------------------------
+# ---------------------------------------------------------
 func _handle_look_controller(delta: float):
 	if not is_local or is_paused:
 		return
@@ -154,10 +157,9 @@ func _handle_look_controller(delta: float):
 		camera_pivot.rotation.y = yaw
 		camera.rotation.x = pitch
 
-
-# -------------------------------
-# MOVEMENT + SPRINT
-# -------------------------------
+# ---------------------------------------------------------
+# MOVEMENT
+# ---------------------------------------------------------
 func _handle_movement(delta: float):
 	if not is_local or is_paused:
 		return
@@ -182,39 +184,42 @@ func _handle_movement(delta: float):
 		velocity.x = move_toward(velocity.x, 0, WALK_SPEED)
 		velocity.z = move_toward(velocity.z, 0, WALK_SPEED)
 
-
-# -------------------------------
-# DEATH CHECK
-# -------------------------------
+# ---------------------------------------------------------
+# DEATH
+# ---------------------------------------------------------
 func _check_death():
 	if hp <= 0:
 		_respawn()
 
-
-# -------------------------------
-# RESPAWN LOGIC
-# -------------------------------
 func _respawn():
 	get_tree().quit()
 
-
-# -------------------------------
+# ---------------------------------------------------------
 # WEAPON HANDLING
-# -------------------------------
+# ---------------------------------------------------------
 func _spawn_weapon_from_index():
 	if weapon_index < 0 or weapon_index >= weapon_pool.size():
 		return
+
 	var weapon_scene := weapon_pool[weapon_index]
 	receive_weapon(weapon_scene)
-
 
 func receive_weapon(weapon_scene: PackedScene):
 	if weapon_anchor == null:
 		return
 
+	# Remove old weapon
 	for c in weapon_anchor.get_children():
 		c.queue_free()
 
+	# Spawn new weapon
 	var weapon = weapon_scene.instantiate()
 	weapon_anchor.add_child(weapon)
 	weapon.global_transform = weapon_anchor.global_transform
+
+	# -----------------------------------------------------
+	# HUD UPDATE: Weapon Name
+	# -----------------------------------------------------
+	var ui = get_tree().get_nodes_in_group("weapon_name_ui")
+	if ui.size() > 0:
+		ui[0].set_weapon_name(weapon.NAME)

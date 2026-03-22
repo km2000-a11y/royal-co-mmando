@@ -2,11 +2,11 @@
 
 [resource]
 bus/0/volume_db = -9.63761
-bus/1/name = &"Gunshots"
+bus/1/name = &"Gunshot"
 bus/1/solo = false
 bus/1/mute = false
 bus/1/bypass_fx = false
-bus/1/volume_db = -10.9863
+bus/1/volume_db = -11.1453
 bus/1/send = &"Master"
 bus/2/name = &"Reload"
 bus/2/solo = false

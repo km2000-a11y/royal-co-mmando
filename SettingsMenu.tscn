@@ -24,7 +24,7 @@ offset_bottom = 40.0
 [node name="Label" type="Label" parent="PanelRoot/Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "SETTINGS"
+text = "Settings"
 horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="PanelRoot/Panel/VBoxContainer"]
@@ -35,7 +35,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="PanelRoot/Panel/VBoxContainer/ResolutionRow"]
 layout_mode = 2
-text = "RESOLUTION"
+text = "Resolution Scale"
 
 [node name="ResolutionSelector" type="OptionButton" parent="PanelRoot/Panel/VBoxContainer/ResolutionRow"]
 layout_mode = 2

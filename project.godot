@@ -25,6 +25,7 @@ window/vsync/vsync_mode=0
 [global_group]
 
 player=""
+weapon_name_ui=""
 
 [input]
 
