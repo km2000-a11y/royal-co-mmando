@@ -65,3 +65,8 @@ expand_to_text_length = true
 emoji_menu_enabled = false
 
 [node name="SettingsMenu" parent="." instance=ExtResource("7_imgw4")]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 300.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

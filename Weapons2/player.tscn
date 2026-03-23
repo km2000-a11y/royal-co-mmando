@@ -11,6 +11,7 @@ radius = 0.35
 radius = 0.35
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
+floor_max_angle = 1.48353
 script = ExtResource("1_fg4n5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

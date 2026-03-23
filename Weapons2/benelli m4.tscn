@@ -337,4 +337,4 @@ stream = ExtResource("2_kyd0h")
 stream = ExtResource("3_i3i8y")
 
 [node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.218923, 0.0827892, 0.976026)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.218923, 0.0477449, 0.81005)

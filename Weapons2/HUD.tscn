@@ -64,3 +64,10 @@ offset_right = 319.0
 offset_bottom = 717.0
 text = "Weapon:"
 script = ExtResource("6_fyaff")
+
+[node name="TimerLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 896.0
+offset_right = 1121.0
+offset_bottom = 128.0
+text = "Time remaining:"

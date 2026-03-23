@@ -61,13 +61,14 @@ var weapon_pool: Array[PackedScene] = [
 	preload("res://Weapons2/ak4.tscn"),
 	preload("res://Weapons2/scout 556.tscn"),
 	preload("res://Weapons2/awm.tscn"),
+	preload("res://Weapons2/fal tactical.tscn"),
 
 	preload("res://Weapons2/negev lmg.tscn"),
 	preload("res://Weapons2/rpk.tscn"),
 
 	preload("res://Weapons2/spas12.tscn"),
 	preload("res://Weapons2/sawed off.tscn"),
-	preload("")
+	preload("res://Weapons2/benelli m4.tscn")
 ]
 
 # ---------------------------------------------------------
@@ -223,6 +224,7 @@ func receive_weapon(weapon_scene: PackedScene):
 	# -----------------------------------------------------
 	# HUD UPDATE: Weapon Name
 	# -----------------------------------------------------
+	
 	var ui = get_tree().get_nodes_in_group("weapon_name_ui")
 	if ui.size() > 0:
 		ui[0].set_weapon_name(weapon.NAME)

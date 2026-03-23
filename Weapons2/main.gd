@@ -10,11 +10,13 @@ var ready_clients: Array[int] = []
 
 func _ready():
 	map.visible = false
-
+	$Timer.start()
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
 	multiplayer.connection_failed.connect(_on_connection_failed)
 
+func _process(delta):
+	$HUD/Control/TimerLabel.text = "Time remaining: "+str(int($Timer.time_left/60))+":"+str(int($Timer.time_left)%60)
 
 func _on_connected_to_server():
 	print("Client connected to host")
@@ -89,3 +91,6 @@ func _spawn_players():
 func _spawn_players_remote(ids: Array[int]):
 	for id in ids:
 		map.spawn_player(id)
+
+func _on_timer_timeout() -> void:
+	get_tree().quit()
