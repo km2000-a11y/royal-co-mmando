@@ -58,7 +58,7 @@ func _load_settings() -> void:
 	if cfg.load("user://settings.cfg") != OK:
 		return
 
-	var index: int = cfg.get_value("video", "scale_index", 3)
+	var index: int = cfg.get_value("video", "scale_index", 2)
 	resolution_selector.select(index)
 	_apply_resolution_scale(index)
 
