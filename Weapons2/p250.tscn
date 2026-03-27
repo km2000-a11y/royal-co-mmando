@@ -278,11 +278,11 @@ mesh = SubResource("ArrayMesh_uopn1")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_bvbap")
-bus = &"Gunshots"
+bus = &"Gunshot"
 
 [node name="ReloadPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_7pwdg")
-bus = &"Reload"
+bus = &"SFX"
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07616, 0.153116)

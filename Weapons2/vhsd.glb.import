@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d1oobqo8prptr"
-path="res://.godot/imported/m9_bayonet_low-poly.glb-07d6635339303925dba3056da62195e7.scn"
+uid="uid://vxd1vavccplw"
+path="res://.godot/imported/vhsd.glb-a51667b321ccc89e292deeb1c5146b31.scn"
 
 [deps]
 
-source_file="res://Weapons2/m9_bayonet_low-poly.glb"
-dest_files=["res://.godot/imported/m9_bayonet_low-poly.glb-07d6635339303925dba3056da62195e7.scn"]
+source_file="res://Weapons2/vhsd.glb"
+dest_files=["res://.godot/imported/vhsd.glb-a51667b321ccc89e292deeb1c5146b31.scn"]
 
 [params]
 

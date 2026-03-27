@@ -513,6 +513,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_g3xhm")
 
 [node name="Sketchfab_Scene" type="Node3D" groups=["ammo_ui", "weapon"]]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("1_tnovi")
 NAME = "AUG A1"
 COUNTRY_OF_ORIGIN = "Austria"
@@ -566,8 +567,8 @@ mesh = SubResource("ArrayMesh_5s2p1")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_amrb6")
 max_polyphony = 8
-bus = &"Gunshots"
+bus = &"Gunshot"
 
 [node name="ReloadPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_tnovi")
-bus = &"Reload"
+bus = &"SFX"

@@ -62,6 +62,7 @@ var weapon_pool: Array[PackedScene] = [
 	preload("res://Weapons2/scout 556.tscn"),
 	preload("res://Weapons2/awm.tscn"),
 	preload("res://Weapons2/fal tactical.tscn"),
+	preload("res://Weapons2/sg550.tscn"),
 
 	preload("res://Weapons2/negev lmg.tscn"),
 	preload("res://Weapons2/rpk.tscn"),
@@ -102,6 +103,12 @@ func _toggle_pause() -> void:
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		settings_menu.hide()
+
+# ---------------------------------------------------------
+# SHOOTING PERMISSION (USED BY WEAPONS)
+# ---------------------------------------------------------
+func can_shoot() -> bool:
+	return is_local and not is_paused
 
 # ---------------------------------------------------------
 # INPUT
@@ -221,10 +228,7 @@ func receive_weapon(weapon_scene: PackedScene):
 	weapon_anchor.add_child(weapon)
 	weapon.global_transform = weapon_anchor.global_transform
 
-	# -----------------------------------------------------
-	# HUD UPDATE: Weapon Name
-	# -----------------------------------------------------
-	
+	# HUD update
 	var ui = get_tree().get_nodes_in_group("weapon_name_ui")
 	if ui.size() > 0:
 		ui[0].set_weapon_name(weapon.NAME)

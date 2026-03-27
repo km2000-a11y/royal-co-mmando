@@ -324,7 +324,6 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ya6dr")
 
 [node name="Sketchfab_Scene" type="Node3D" groups=["ammo_ui", "weapon"]]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("1_bfrq0")
 DAMAGE = 150
 RANGE = 300.0
@@ -368,11 +367,11 @@ mesh = SubResource("ArrayMesh_66hrx")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_bn0uy")
-bus = &"Gunshots"
+bus = &"Gunshot"
 
 [node name="ReloadPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_h5m4i")
-bus = &"Reload"
+bus = &"SFX"
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03587, 0.0787723, 0)

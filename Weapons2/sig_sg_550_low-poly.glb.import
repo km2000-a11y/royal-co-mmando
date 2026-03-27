@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dc2spgmdtx3yl"
-path="res://.godot/imported/steyr_scout_low-poly (1).glb-340cbea63ebd97d96065b8fd52553f16.scn"
+uid="uid://lcvm5j2gtn45"
+path="res://.godot/imported/sig_sg_550_low-poly.glb-25af12d080493c77ce14824ae8b38ce0.scn"
 
 [deps]
 
-source_file="res://Weapons2/steyr_scout_low-poly (1).glb"
-dest_files=["res://.godot/imported/steyr_scout_low-poly (1).glb-340cbea63ebd97d96065b8fd52553f16.scn"]
+source_file="res://Weapons2/sig_sg_550_low-poly.glb"
+dest_files=["res://.godot/imported/sig_sg_550_low-poly.glb-25af12d080493c77ce14824ae8b38ce0.scn"]
 
 [params]
 

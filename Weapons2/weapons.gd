@@ -1,6 +1,8 @@
 extends Node3D
 
-# --- Weapon Data ---
+# ---------------------------------------------------------
+#  WEAPON DATA
+# ---------------------------------------------------------
 @export_group("Ballistics")
 @export var DAMAGE := 60
 @export var RANGE := 200.0
@@ -21,18 +23,24 @@ extends Node3D
 @export var NAME := "Weapon"
 @export var COUNTRY_OF_ORIGIN := ""
 
-# --- Signals ---
+# ---------------------------------------------------------
+#  SIGNALS
+# ---------------------------------------------------------
 signal ammo_changed(current, reserve)
 signal reload_status_changed(reloading)
 
-# --- Internal State ---
-var current_ammo : int
-var reserve_ammo : int
+# ---------------------------------------------------------
+#  INTERNAL STATE
+# ---------------------------------------------------------
+var current_ammo: int
+var reserve_ammo: int
 var is_reloading := false
 var time_since_last_shot := 0.0
 var base_mesh_pos := Vector3.ZERO
 
-# --- Node References ---
+# ---------------------------------------------------------
+#  NODE REFERENCES
+# ---------------------------------------------------------
 var cam: Camera3D
 var player_body: CharacterBody3D
 
@@ -41,6 +49,9 @@ var player_body: CharacterBody3D
 @onready var reload_sfx: AudioStreamPlayer3D = get_node_or_null("ReloadPlayer")
 @onready var muzzle: Node3D = get_node_or_null("Node3D")
 
+# ---------------------------------------------------------
+#  READY
+# ---------------------------------------------------------
 func _ready():
 	current_ammo = MAG_SIZE
 	reserve_ammo = RESERVE_MAX
@@ -48,8 +59,9 @@ func _ready():
 	await get_tree().process_frame
 	cam = get_viewport().get_camera_3d()
 
+	# Find the player this weapon belongs to
 	var p = get_parent()
-	while p != null:
+	while p:
 		if p is CharacterBody3D:
 			player_body = p
 			break
@@ -60,25 +72,40 @@ func _ready():
 
 	ammo_changed.emit(current_ammo, reserve_ammo)
 
+# ---------------------------------------------------------
+#  PROCESS LOOP
+# ---------------------------------------------------------
 func _process(delta):
 	if not is_visible_in_tree():
 		return
 
-	# Removed Global.in_menu check
+	# BLOCK ALL SHOOTING WHILE MENU IS OPEN
+	if player_body and not player_body.can_shoot():
+		return
 
+	# Fire rate cooldown
 	if time_since_last_shot > 0:
 		time_since_last_shot -= delta
 
+	# Input
 	if Input.is_action_pressed("shoot"):
 		try_fire()
 
 	if Input.is_action_just_pressed("reload"):
 		reload()
 
+	# Recoil return
 	if mesh:
 		mesh.position = mesh.position.lerp(base_mesh_pos, KICK_RETURN * delta)
 
+# ---------------------------------------------------------
+#  FIRE LOGIC
+# ---------------------------------------------------------
 func try_fire():
+	# BLOCK SHOOTING WHILE MENU IS OPEN
+	if player_body and not player_body.can_shoot():
+		return
+
 	if is_reloading or time_since_last_shot > 0:
 		return
 
@@ -96,9 +123,13 @@ func fire():
 		gunshot.play()
 
 	ammo_changed.emit(current_ammo, reserve_ammo)
+
 	_perform_raycast_logic(RANGE, DAMAGE)
 	apply_recoil()
 
+# ---------------------------------------------------------
+#  RAYCAST
+# ---------------------------------------------------------
 func _perform_raycast_logic(ray_range: float, ray_damage: int):
 	if not cam:
 		return
@@ -120,6 +151,9 @@ func _perform_raycast_logic(ray_range: float, ray_damage: int):
 	else:
 		create_tracer(end)
 
+# ---------------------------------------------------------
+#  TRACER
+# ---------------------------------------------------------
 func create_tracer(target_pos: Vector3):
 	var mesh_instance := MeshInstance3D.new()
 	var immediate_mesh := ImmediateMesh.new()
@@ -131,6 +165,7 @@ func create_tracer(target_pos: Vector3):
 	material.albedo_color = Color(1.0, 0.9, 0.5)
 
 	get_tree().root.add_child(mesh_instance)
+
 	var start_pos = muzzle.global_position if muzzle else global_position
 
 	immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES, material)
@@ -141,18 +176,26 @@ func create_tracer(target_pos: Vector3):
 	await get_tree().create_timer(0.05).timeout
 	mesh_instance.queue_free()
 
+# ---------------------------------------------------------
+#  RECOIL
+# ---------------------------------------------------------
 func apply_recoil():
 	if cam:
 		cam.rotation_degrees.x += RECOIL_UP
 		cam.rotation_degrees.y += randf_range(-RECOIL_SIDE, RECOIL_SIDE)
+
 	if mesh:
 		mesh.position.z += KICKBACK
 
+# ---------------------------------------------------------
+#  RELOAD
+# ---------------------------------------------------------
 func reload():
 	if is_reloading or current_ammo == MAG_SIZE or reserve_ammo <= 0:
 		return
 
 	is_reloading = true
+
 	if reload_sfx:
 		reload_sfx.play()
 
@@ -162,6 +205,7 @@ func reload():
 
 	var needed = MAG_SIZE - current_ammo
 	var taken = min(needed, reserve_ammo)
+
 	current_ammo += taken
 	reserve_ammo -= taken
 

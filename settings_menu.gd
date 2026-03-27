@@ -19,7 +19,7 @@ var gunshot_volume := 1.0
 @onready var gunshot_label: Label = $PanelRoot/Panel/VBoxContainer/VolumeRow/VolValue
 
 # IMPORTANT: point this to your actual gunshot AudioStreamPlayer
-@onready var gunshot_player: AudioStreamPlayer = get_node("")
+@onready var gunshot_player: AudioStreamPlayer = $AudioStreamPlayer3D
 
 # -------------------------
 #  Lifecycle
