@@ -11,10 +11,6 @@ func _ready():
 		const ua = navigator.userAgent || "";
 
 		// --- iOS browsers ---
-		if (ua.includes("CriOS")) return "Chrome (iOS)";
-		if (ua.includes("FxiOS")) return "Firefox (iOS)";
-		if (ua.includes("EdgiOS")) return "Edge (iOS)";
-		if (ua.includes("OPiOS")) return "Opera (iOS)";
 
 		// --- Samsung Internet ---
 		if (ua.includes("SamsungBrowser")) return "Samsung Internet";
@@ -42,9 +38,6 @@ func _ready():
 
 		// --- Chrome ---
 		if (ua.includes("Chrome")) return "Chrome";
-
-		// --- Safari ---
-		if (ua.includes("Safari")) return "Safari";
 
 		return "Unknown Browser";
 	})()
