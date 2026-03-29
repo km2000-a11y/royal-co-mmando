@@ -23,7 +23,7 @@ script = ExtResource("5_tpsl6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.782074, 0, 5.99631)
 
 [node name="GuardSpawn" type="Marker3D" parent="Map/SpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25388, 0.11077, -24.1805)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4242, 0.11077, -37.2721)
 
 [node name="GangsterSpawn" type="Marker3D" parent="Map/SpawnPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5352, 0, 100)
