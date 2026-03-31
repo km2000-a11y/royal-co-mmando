@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cr3jcyli0yhhk"]
+[gd_scene load_steps=7 format=3 uid="uid://cr3jcyli0yhhk"]
 
 [ext_resource type="Script" uid="uid://djw3jm4pmenio" path="res://Weapons2/ammo_counter.gd" id="1_ne771"]
 [ext_resource type="Script" uid="uid://kt7egwv2wr0l" path="res://Weapons2/cpu_label.gd" id="3_uhlic"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://tnotvky4mi0d" path="res://Weapons2/browser_name.gd" id="5_fyaff"]
 [ext_resource type="Script" uid="uid://c30tp33lmf4rm" path="res://Weapons2/os_name.gd" id="6_23typ"]
 [ext_resource type="Script" uid="uid://b1hvynu6hllut" path="res://Weapons2/weapon_name_label.gd" id="6_fyaff"]
-[ext_resource type="Script" uid="uid://cvod7m3rw2ifl" path="res://Weapons2/tick_label.gd" id="7_fyaff"]
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -72,11 +71,3 @@ offset_left = 896.0
 offset_right = 1121.0
 offset_bottom = 128.0
 text = "Time remaining:"
-
-[node name="TickLabel" type="Label" parent="Control"]
-layout_mode = 0
-offset_top = 698.0
-offset_right = 241.0
-offset_bottom = 787.0
-text = "TTicks per second (speed game loop is running): "
-script = ExtResource("7_fyaff")
