@@ -9,8 +9,38 @@ func _ready():
 	var js = """
 	(() => {
 		const ua = navigator.userAgent || "";
+		const isIOS = /iPhone|iPad|iPod/.test(ua);
+		const isWebKit = /WebKit/.test(ua) && !/Chrome/.test(ua);
 
-		// --- iOS browsers ---
+		// --- Safari (macOS) ---
+		if (!isIOS && ua.includes("Safari") && !ua.includes("Chrome"))
+			return "Safari";
+
+		// --- iOS Browsers (all WebKit-based) ---
+
+		// Chrome on iOS
+		if (isIOS && ua.includes("CriOS"))
+			return "Chrome (iOS)";
+
+		// Firefox on iOS
+		if (isIOS && ua.includes("FxiOS"))
+			return "Firefox (iOS)";
+
+		// Edge on iOS
+		if (isIOS && ua.includes("EdgiOS"))
+			return "Microsoft Edge (iOS)";
+
+		// Brave on iOS
+		if (isIOS && ua.includes("Brave"))
+			return "Brave (iOS)";
+
+		// DuckDuckGo on iOS
+		if (isIOS && ua.includes("DuckDuckGo"))
+			return "DuckDuckGo Browser (iOS)";
+
+		// Generic iOS WebKit fallback
+		if (isIOS && isWebKit)
+			return "Safari (iOS)";
 
 		// --- Samsung Internet ---
 		if (ua.includes("SamsungBrowser")) return "Samsung Internet";
@@ -18,16 +48,16 @@ func _ready():
 		// --- Opera ---
 		if (ua.includes("OPR") || ua.includes("Opera")) return "Opera";
 
-		// --- Edge ---
+		// --- Edge (desktop) ---
 		if (ua.includes("Edg")) return "Microsoft Edge";
 
-		// --- Brave ---
+		// --- Brave (desktop) ---
 		if (typeof navigator.brave !== "undefined") return "Brave";
 
 		// --- Vivaldi ---
 		if (ua.includes("Vivaldi")) return "Vivaldi";
 
-		// --- DuckDuckGo ---
+		// --- DuckDuckGo (desktop) ---
 		if (ua.includes("DuckDuckGo")) return "DuckDuckGo Browser";
 
 		// --- UC Browser ---

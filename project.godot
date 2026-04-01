@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="ROYAL CoMMANDO"
+config/name="Royal Commando"
 run/main_scene="uid://dljkh0n7qd2un"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -23,6 +23,7 @@ BrowserGatekeeper="*res://browser_gatekeeper.gd"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/vsync/vsync_mode=0
 
