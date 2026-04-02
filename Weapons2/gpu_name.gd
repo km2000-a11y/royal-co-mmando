@@ -1,11 +1,14 @@
 extends Label
 
-func _ready():
+func _ready() -> void:
+	text = "GPU: " + get_gpu_name()
+
+
+func get_gpu_name() -> String:
+	# Try Vulkan RenderingDevice first
 	var rd := RenderingServer.get_rendering_device()
+	if rd != null:
+		return rd.get_device_name()
 
-	if rd == null:
-		text = "GPU: (Unavailable in Editor)"
-		return
-
-	var gpu := rd.get_device_name()
-	text = "GPU: %s" % gpu
+	# Fallback for OpenGL / Compatibility mode
+	return RenderingServer.get_video_adapter_name()
