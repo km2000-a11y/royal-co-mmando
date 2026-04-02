@@ -21,6 +21,12 @@ var gunshot_volume := 1.0
 # IMPORTANT: point this to your actual gunshot AudioStreamPlayer
 @onready var gunshot_player: AudioStreamPlayer = $AudioStreamPlayer3D
 
+var mouse_sens := 0.01
+@onready var sens_slider: HSlider = $PanelRoot/Panel/VBoxContainer/MouseSensRow/MouseSensSlider
+@onready var sens_label: Label =  $PanelRoot/Panel/VBoxContainer/MouseSensRow/SensValue
+
+func _update_sens_label() -> void:
+	sens_label.text = str(mouse_sens)
 # -------------------------
 #  Lifecycle
 # -------------------------
@@ -68,6 +74,11 @@ func _load_settings() -> void:
 	_apply_resolution_scale(index)
 
 	gunshot_volume = cfg.get_value("audio", "gunshot_volume", 1.0)
+	
+	mouse_sens = cfg.get_value("input", "mouse_sens", 0.01)
+	sens_slider.value = mouse_sens
+	_update_sens_label()
+
 
 # -------------------------
 #  Gunshot Volume (Player-based)
@@ -102,3 +113,13 @@ func _on_vol_up_pressed() -> void:
 	gunshot_volume = clamp(gunshot_volume + 0.05, 0.0, 1.0)
 	_apply_gunshot_volume()
 	_update_gunshot_label()
+
+func _on_mouse_sens_slider_value_changed(value: float) -> void:
+	mouse_sens=value
+	_update_sens_label()
+	_save_settings(resolution_selector.get_selected_id())
+	
+	var player = get_tree().get_first_node_in_group("player")
+	if player:
+		player.set_mouse_sens(mouse_sens)
+	

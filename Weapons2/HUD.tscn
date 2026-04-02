@@ -26,6 +26,7 @@ text = "Ammo:"
 script = ExtResource("1_ne771")
 
 [node name="CPULabel" type="Label" parent="Control"]
+layout_mode = 0
 offset_top = 68.0
 offset_right = 136.0
 offset_bottom = 94.0

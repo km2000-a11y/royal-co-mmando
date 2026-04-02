@@ -87,7 +87,15 @@ func _ready():
 	if is_local:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		weapon_index = randi() % weapon_pool.size()
+	
+	if is_local:
+		var cfg := ConfigFile.new()
+		if cfg.load("user://settings.cfg") == OK:
+			mouse_sens=cfg.get_value("input","mouse_sens",0.01)
 
+
+
+		
 	await get_tree().process_frame
 	_spawn_weapon_from_index()
 
@@ -232,3 +240,9 @@ func receive_weapon(weapon_scene: PackedScene):
 	var ui = get_tree().get_nodes_in_group("weapon_name_ui")
 	if ui.size() > 0:
 		ui[0].set_weapon_name(weapon.NAME)
+
+func set_mouse_sens(value: float) -> void:
+	mouse_sens=value
+
+
+	
