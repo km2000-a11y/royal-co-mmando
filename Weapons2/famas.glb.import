@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://vxd1vavccplw"
-path="res://.godot/imported/vhsd.glb-a51667b321ccc89e292deeb1c5146b31.scn"
+path="res://.godot/imported/famas.glb-6d0e4da63438dd871f6ec5ae218c96d4.scn"
 
 [deps]
 
-source_file="res://Weapons2/vhsd.glb"
-dest_files=["res://.godot/imported/vhsd.glb-a51667b321ccc89e292deeb1c5146b31.scn"]
+source_file="res://Weapons2/famas.glb"
+dest_files=["res://.godot/imported/famas.glb-6d0e4da63438dd871f6ec5ae218c96d4.scn"]
 
 [params]
 
