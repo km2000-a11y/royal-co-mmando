@@ -13,27 +13,33 @@ const SCALES = {
 @onready var resolution_selector: OptionButton = $PanelRoot/Panel/VBoxContainer/ResolutionRow/ResolutionSelector
 
 # -------------------------
-#  Gunshot Volume
+#  Master Volume (SFX)
 # -------------------------
-var gunshot_volume := 1.0
-@onready var gunshot_label: Label = $PanelRoot/Panel/VBoxContainer/VolumeRow/VolValue
+var master_volume := 1.0
+@onready var volume_label: Label = $PanelRoot/Panel/VBoxContainer/VolumeRow/VolValue
 
-# IMPORTANT: point this to your actual gunshot AudioStreamPlayer
+# IMPORTANT: point these to your actual AudioStreamPlayers
 @onready var gunshot_player: AudioStreamPlayer = $AudioStreamPlayer3D
+@onready var reload_player: AudioStreamPlayer = $ReloadPlayer
 
+# -------------------------
+#  Mouse Sensitivity
+# -------------------------
 var mouse_sens := 0.01
 @onready var sens_slider: HSlider = $PanelRoot/Panel/VBoxContainer/MouseSensRow/MouseSensSlider
-@onready var sens_label: Label =  $PanelRoot/Panel/VBoxContainer/MouseSensRow/SensValue
+@onready var sens_label: Label = $PanelRoot/Panel/VBoxContainer/MouseSensRow/SensValue
 
 func _update_sens_label() -> void:
 	sens_label.text = str(mouse_sens)
+
 # -------------------------
 #  Lifecycle
 # -------------------------
 func _ready() -> void:
 	_populate_resolution_selector()
 	_load_settings()
-	_load_gunshot_volume()
+	_apply_master_volume()
+	_update_volume_label()
 	hide()
 
 # -------------------------
@@ -56,12 +62,13 @@ func _apply_resolution_scale(index: int) -> void:
 		print("Applied render scale:", scale)
 
 # -------------------------
-#  Save / Load resolution
+#  Save / Load settings
 # -------------------------
 func _save_settings(index: int) -> void:
 	var cfg := ConfigFile.new()
 	cfg.set_value("video", "scale_index", index)
-	cfg.set_value("audio", "gunshot_volume", gunshot_volume)
+	cfg.set_value("audio", "master_volume", master_volume)
+	cfg.set_value("input", "mouse_sens", mouse_sens)
 	cfg.save("user://settings.cfg")
 
 func _load_settings() -> void:
@@ -73,29 +80,39 @@ func _load_settings() -> void:
 	resolution_selector.select(index)
 	_apply_resolution_scale(index)
 
-	gunshot_volume = cfg.get_value("audio", "gunshot_volume", 1.0)
-	
+	master_volume = cfg.get_value("audio", "master_volume", 1.0)
+
 	mouse_sens = cfg.get_value("input", "mouse_sens", 0.01)
 	sens_slider.value = mouse_sens
 	_update_sens_label()
 
-
 # -------------------------
-#  Gunshot Volume (Player-based)
+#  Master Volume (unified)
 # -------------------------
-func _load_gunshot_volume() -> void:
-	var bus := AudioServer.get_bus_index("Gunshot")
-	var db := AudioServer.get_bus_volume_db(bus)
-	gunshot_volume = db_to_linear(db)
-	_update_gunshot_label()
+func _apply_master_volume()->void:
+	var db:=linear_to_db(master_volume)
+	
+	var gunshot_bus = AudioServer.get_bus_index("Gunshot")
+	if gunshot_bus != -1:
+		AudioServer.set_bus_volume_db(gunshot_bus,db)
+	
+	var sfx_bus=AudioServer.get_bus_index("SFX")
+	if sfx_bus!=-1:
+		AudioServer.set_bus_volume_db(sfx_bus,db)
+	
+	if is_instance_valid(gunshot_player):
+		gunshot_player.volume_db=db
+	if is_instance_valid(reload_player):
+		reload_player.volume_db=db
 
-func _apply_gunshot_volume() -> void:
-	var bus := AudioServer.get_bus_index("Gunshot")
-	var db := linear_to_db(gunshot_volume)
-	AudioServer.set_bus_volume_db(bus, db)
+	# Apply directly to players (safety checks)
+	if is_instance_valid(gunshot_player):
+		gunshot_player.volume_db = db
+	if is_instance_valid(reload_player):
+		reload_player.volume_db = db
 
-func _update_gunshot_label() -> void:
-	gunshot_label.text = str(round(gunshot_volume * 100)) + "%"
+func _update_volume_label() -> void:
+	volume_label.text = str(round(master_volume * 100)) + "%"
 
 # -------------------------
 #  UI Signals
@@ -105,21 +122,22 @@ func _on_resolution_selector_item_selected(index: int) -> void:
 	_save_settings(index)
 
 func _on_vol_down_pressed() -> void:
-	gunshot_volume = clamp(gunshot_volume - 0.05, 0.0, 1.0)
-	_apply_gunshot_volume()
-	_update_gunshot_label()
+	master_volume = clamp(master_volume - 0.05, 0.0, 1.0)
+	_apply_master_volume()
+	_update_volume_label()
+	_save_settings(resolution_selector.get_selected_id())
 
 func _on_vol_up_pressed() -> void:
-	gunshot_volume = clamp(gunshot_volume + 0.05, 0.0, 1.0)
-	_apply_gunshot_volume()
-	_update_gunshot_label()
+	master_volume = clamp(master_volume + 0.05, 0.0, 1.0)
+	_apply_master_volume()
+	_update_volume_label()
+	_save_settings(resolution_selector.get_selected_id())
 
 func _on_mouse_sens_slider_value_changed(value: float) -> void:
-	mouse_sens=value
+	mouse_sens = value
 	_update_sens_label()
 	_save_settings(resolution_selector.get_selected_id())
-	
-	var player = get_tree().get_first_node_in_group("player")
+
+	var player = get_tree().get_first_node_in_group("Player")
 	if player:
 		player.set_mouse_sens(mouse_sens)
-	
