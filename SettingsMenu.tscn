@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxs2y18ccneq"]
+[gd_scene load_steps=3 format=3 uid="uid://dxs2y18ccneq"]
 
 [ext_resource type="Script" uid="uid://c4bt5a8ppeklj" path="res://settings_menu.gd" id="1_svoao"]
+[ext_resource type="FontFile" uid="uid://bb5j4xnyisaky" path="res://Weapons2/Noto_Sans (1)/NotoSans-VariableFont_wdth,wght.ttf" id="2_jttlj"]
 
 [node name="SettingsMenu" type="CanvasLayer"]
 script = ExtResource("1_svoao")
@@ -35,6 +36,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="PanelRoot/Panel/VBoxContainer/ResolutionRow"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_jttlj")
 text = "Resolution Scale"
 
 [node name="ResolutionSelector" type="OptionButton" parent="PanelRoot/Panel/VBoxContainer/ResolutionRow"]
@@ -63,6 +65,7 @@ text = "+"
 
 [node name="VolValue" type="Label" parent="PanelRoot/Panel/VBoxContainer/VolumeRow"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_jttlj")
 text = "Volume: "
 
 [node name="MouseSensRow" type="HBoxContainer" parent="PanelRoot/Panel/VBoxContainer"]
@@ -72,16 +75,18 @@ layout_mode = 2
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 min_value = 0.01
-max_value = 0.08
-step = 0.001
+max_value = 0.7
+step = 0.006
 value = 0.01
 
 [node name="Label" type="Label" parent="PanelRoot/Panel/VBoxContainer/MouseSensRow"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_jttlj")
 text = "Mouse sensitivity:"
 
 [node name="SensValue" type="Label" parent="PanelRoot/Panel/VBoxContainer/MouseSensRow"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_jttlj")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 233.0
