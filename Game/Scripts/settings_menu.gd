@@ -21,15 +21,6 @@ var master_volume := 1.0
 # IMPORTANT: point these to your actual AudioStreamPlayers
 @onready var gunshot_player: AudioStreamPlayer = $AudioStreamPlayer3D
 @onready var reload_player: AudioStreamPlayer = $ReloadPlayer
-# -------------------------
-#  Mouse Sensitivity
-# -------------------------
-var mouse_sens := 0.01
-@onready var sens_slider: HSlider = $PanelRoot/Panel/VBoxContainer/MouseSensRow/MouseSensSlider
-@onready var sens_label: Label = $PanelRoot/Panel/VBoxContainer/MouseSensRow/SensValue
-
-func _update_sens_label() -> void:
-	sens_label.text = str(mouse_sens)
 
 # -------------------------
 #  Lifecycle
@@ -67,7 +58,6 @@ func _save_settings(index: int) -> void:
 	var cfg := ConfigFile.new()
 	cfg.set_value("video", "scale_index", index)
 	cfg.set_value("audio", "master_volume", master_volume)
-	cfg.set_value("input", "mouse_sens", mouse_sens)
 	cfg.save("user://settings.cfg")
 
 func _load_settings() -> void:
@@ -81,30 +71,18 @@ func _load_settings() -> void:
 
 	master_volume = cfg.get_value("audio", "master_volume", 1.0)
 
-	mouse_sens = cfg.get_value("input", "mouse_sens", 0.01)
-	sens_slider.value = mouse_sens
-	_update_sens_label()
-
-# -------------------------
-#  Master Volume (unified)
 # -------------------------
 func _apply_master_volume()->void:
-	var db:=linear_to_db(master_volume)
+	var db := linear_to_db(master_volume)
 	
 	var gunshot_bus = AudioServer.get_bus_index("Gunshot")
 	if gunshot_bus != -1:
-		AudioServer.set_bus_volume_db(gunshot_bus,db)
+		AudioServer.set_bus_volume_db(gunshot_bus, db)
 	
-	var sfx_bus=AudioServer.get_bus_index("SFX")
-	if sfx_bus!=-1:
-		AudioServer.set_bus_volume_db(sfx_bus,db)
+	var sfx_bus = AudioServer.get_bus_index("SFX")
+	if sfx_bus != -1:
+		AudioServer.set_bus_volume_db(sfx_bus, db)
 	
-	if is_instance_valid(gunshot_player):
-		gunshot_player.volume_db=db
-	if is_instance_valid(reload_player):
-		reload_player.volume_db=db
-
-	# Apply directly to players (safety checks)
 	if is_instance_valid(gunshot_player):
 		gunshot_player.volume_db = db
 	if is_instance_valid(reload_player):
