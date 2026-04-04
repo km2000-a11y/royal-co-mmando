@@ -1,0 +1,103 @@
+[gd_scene load_steps=8 format=4 uid="uid://b2w7h5cmi25qs"]
+
+[ext_resource type="AudioStream" uid="uid://dg2pfqdjm6ym0" path="res://Game/Sound effects/gunshot.mp3" id="1_8w6yl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rh58j"]
+resource_name = "Cube_Double_Barrel_Shotgun_1_Material_1"
+cull_mode = 2
+albedo_color = Color(0.353319, 0.213807, 0.135493, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ywtxr"]
+_surfaces = [{
+"aabb": AABB(-0.075578, -0.608486, -0.256442, 0.151156, 0.955427, 0.352274),
+"format": 34896613377,
+"index_count": 144,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAAACAAQAAQAFAAMAAAAFAAEAAgADAAYABQAGAAMAAgAGAAQAAAAHAAUABQAHAAYABAAHAAAABAAGAAcACAAJAAoACQALAAoACQAMAAsACAAMAAkACgALAA0ADAANAAsACAAKAA4ACgANAA4ADQAIAA4ACAAPAAwADAAPAA0ADQAPAAgAEAARABIAEQATABIAEQAUABMAEAAUABEAEgATABUAFAAVABMAEAASABYAEgAVABYAFQAQABYAEAAXABQAFAAXABUAFQAXABAAGAAZABoAGQAbABoAGAAaABwAGQAdABsAGAAdABkAGgAbAB4AHQAeABsAGgAeABwAGAAfAB0AHQAfAB4AHAAfABgAHAAeAB8A"),
+"name": "Cube_Double_Barrel_Shotgun_1_Material_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 32,
+"vertex_data": PackedByteArray("SgBZwIr6AAC0/1nAivoAALT/8Yb//wAAtP+HhXeSAABKAPGG//8AALT/774DjQAASgCHhXeSAABKAO++A40AAEoAbO2KmgAAtP9s7YqaAAC0/0DAxPoAALT/SqeUpAAAtP921FpEAABKAEqnlKQAAEoAQMDE+gAASgB21FpEAABKAP//vysAALT///+/KwAAtP8/7ciaAAC0/wbKCW8AALT/xdwAAAAASgAGyglvAABKAD/tyJoAAEoAxdwAAAAAAACMTQrJAAD//4xNCskAAP//AAAKyQAA//8AACCkAAAAAAAACskAAP//jE0gpAAAAAAAACCkAAAAAIxNIKQAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_0ktlk"]
+resource_name = "Sketchfab_Scene_Object_0"
+_surfaces = [{
+"aabb": AABB(-0.075578, -0.608486, -0.256442, 0.151156, 0.955427, 0.352274),
+"attribute_data": PackedByteArray("/9//f/+f/3//n/+//9//v/+f/7//X/+//1////+f////nwAA/18AAP9f/z//n/8//1//f/8f/3//H/+//1//v/+f/3//X/9//1//v/+f/7//n/8//1//P/9f/3//n/9//9//f/+f/3//n/+//9//v/+f/7//X/+//1////+f////XwAA/1//P/+f/z//nwAA/1//f/8f/3//H/+//1//v/+f/3//X/9//1//v/+f/7//n/8//1//P/9f/3//n/9//9//f/+f/3//n/+//9//v/+f/7//X/+//1////+f////XwAA/1//P/+f/z//nwAA/1//f/8f/3//H/+//1//v/+f/3//X/9//1//v/+f/7//n/8//1//P/9f/3//n/9//9//f/+f/3//n/+//9//v/+f/7//X/+//1////+f////nwAA/18AAP9f/z//n/8//1//f/8f/3//H/+//1//v/+f/3//X/9//1//v/+f/7//n/8//1//P/9f/3//n/9/"),
+"format": 34896613399,
+"index_count": 144,
+"index_data": PackedByteArray("AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcAGAAZABoAGAAaABsAHAAdAB4AHAAeAB8AIAAhACIAIAAiACMAJAAlACYAJAAmACcAKAApACoAKAAqACsALAAtAC4ALAAuAC8AMAAxADIAMAAyADMANAA1ADYANAA2ADcAOAA5ADoAOAA6ADsAPAA9AD4APAA+AD8AQABBAEIAQABCAEMARABFAEYARABGAEcASABJAEoASABKAEsATABNAE4ATABOAE8AUABRAFIAUABSAFMAVABVAFYAVABWAFcAWABZAFoAWABaAFsAXABdAF4AXABeAF8A"),
+"material": SubResource("StandardMaterial3D_rh58j"),
+"name": "Cube_Double_Barrel_Shotgun_1_Material_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 96,
+"vertex_data": PackedByteArray("SgBZwIr6AAC0/1nAivoAALT/8Yb//wAASgDxhv//AAC0//GG//98K7T/h4V3knwrSgCHhXeSfCtKAPGG//98K0oA8Yb///w/SgCHhXeS/D9KAO++A438P0oAWcCK+vw/tP/vvgONbQFKAO++A41tAUoAh4V3km0BtP+HhXeSbQG0/1nAivoCAbT/774DjQIBtP+HhXeSAgG0//GG//8CAUoAWcCK+tYpSgDvvgON1im0/+++A43WKbT/WcCK+tYpSgBs7YqaAAC0/2ztipoAALT/QMDE+gAASgBAwMT6AAC0/0DAxPopOLT/SqeUpCk4SgBKp5SkKThKAEDAxPopOEoASqeUpKM7SgB21FpEoztKAGztipqjO0oAQMDE+qM7tP921FpEIBtKAHbUWkQgG0oASqeUpCAbtP9Kp5SkIBu0/2ztipoAE7T/dtRaRAATtP9Kp5SkABO0/0DAxPoAE0oAbO2KmpwZSgB21FpEnBm0/3bUWkScGbT/bO2KmpwZSgD//78rAAC0////vysAALT/P+3ImgAASgA/7ciaAAC0/z/tyJomPrT/BsoJbyY+SgAGyglvJj5KAD/tyJomPkoABsoJb+4zSgDF3AAA7jNKAP//vyvuM0oAP+3Imu4ztP/F3AAAgS5KAMXcAACBLkoABsoJb4EutP8GyglvgS60////vyvwH7T/xdwAAPAftP8Gyglv8B+0/z/tyJrwH0oA//+/K1IMSgDF3AAAUgy0/8XcAABSDLT///+/K1IMAACMTQrJAAD//4xNCskAAP//AAAKyQAAAAAAAArJAAD//wAACsmqKv//AAAgpKoqAAAAACCkqioAAAAACsmqKgAAAAAKyf8/AAAAACCk/z8AAIxNIKT/PwAAjE0Kyf8///+MTSCkAAAAAIxNIKQAAAAAAAAgpAAA//8AACCkAAD//4xNCskAAP//jE0gpAAA//8AACCkAAD//wAACskAAAAAjE0KyaoqAACMTSCkqir//4xNIKSqKv//jE0Kyaoq/38zgv9/M4L/fzOC/38zgioq1NUqKtTVKirU1Soq1NVUhNT9VITU/VSE1P1UhNT9AAD/fwAA/38AAP9/AAD/fxwBcT8cAXE/HAFxPxwBcT8oqyirKKsoqyirKKsoqyir/3/ioP9/4qD/f+Kg/3/ioIwfcuCMH3LgjB9y4IwfcuBTtNTlU7TU5VO01OVTtNTlAAD/fwAA/38AAP9/AAD/f94SkDbeEpA23hKQNt0SkDZ7s3uze7N7s3uze7N7s3uz/38Ksv9/CrL/fwqy/38Ksm8Tj+xvE4/sbxOP7G8Tj+zzxwTc88cE3PPHBNzzxwTcAAD/fwAA/38AAP9/AAD/fxkfcjAZH3IwGR9yMBkfcjC0ubS5tLm0ubS5tLm0ubS5/3//f/9//3//f/9//3//f6oqVNWqKlTVqipU1aoqVNX/f////3////9/////f///////f////3////9/////f/+//3//v/9//7//f/+//3+qqqqqqqqqqqqqqqqqqqqq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ywtxr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5141n"]
+resource_name = "Cube_Double_Barrel_Shotgun_1_Material_2"
+cull_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+roughness = 0.801182
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_bc31k"]
+_surfaces = [{
+"aabb": AABB(-0.096561, -0.874627, -0.055704, 0.193122, 0.771737, 0.17718),
+"format": 34896613377,
+"index_count": 144,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAwACAAEAAAACAAQAAAAFAAMABAAFAAAAAwAGAAIABAAHAAUAAwAFAAcAAgAHAAQAAwAHAAYAAgAGAAcACAAJAAoACQALAAoACAAKAAwACQANAAsACAANAAkACgALAA4ADQAOAAsACgAOAAwACAAPAA0ADQAPAA4ADAAPAAgADAAOAA8AEAARABIAEQATABIAEAASABQAEQAVABMAEAAVABEAEgATABYAFQAWABMAEgAWABQAEAAXABUAFQAXABYAFAAXABAAFAAWABcAGAAZABoAGQAbABoAGAAaABwAGQAdABsAGAAdABkAGgAbAB4AHQAeABsAGgAeABwAGAAfAB0AHQAfAB4AHAAfABgAHAAeAB8A"),
+"name": "Cube_Double_Barrel_Shotgun_1_Material_2",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 32,
+"vertex_data": PackedByteArray("0Bt6/zBwAAAu5Hr/MHAAAC7kXbgwcAAALuR6/wAAAADQG124MHAAANAbev8AAAAALuRduAAAAADQG124AAAAAFuB//+e7AAA/////57sAAD//wAAnuwAAP//AACWYgAAW4EAAJ7sAAD/////lmIAAFuBAACWYgAAW4H//5ZiAAAAAP//nuwAAKN+//+e7AAAo34AAJ7sAACjfgAAlmIAAAAAAACe7AAAo37//5ZiAAAAAAAAlmIAAAAA//+WYgAAGnyWEf//AADkg5YR//8AAOSD7AL//wAA5IPsAh3qAAAafOwC//8AAOSDlhEd6gAAGnzsAh3qAAAafJYRHeoAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_e23ds"]
+resource_name = "Sketchfab_Scene_Object_1"
+_surfaces = [{
+"aabb": AABB(-0.096561, -0.874627, -0.055704, 0.193122, 0.771737, 0.17718),
+"attribute_data": PackedByteArray("/9//f/+f/3//n/+//9//v/+f/7//X/+//1////+f////nwAA/18AAP9f/z//n/8//1//f/8f/3//H/+//1//v/9f/3//X/+//5//v/+f/3//n/8//1//P/9f/3//n/9//9//f/+f/3//n/+//9//v/+f/7//X/+//1////+f////nwAA/18AAP9f/z//n/8//1//f/8f/3//H/+//1//v/+f/3//X/9//1//v/+f/7//n/8//1//P/9f/3//n/9//9//f/+f/3//n/+//9//v/+f/7//X/+//1////+f////nwAA/18AAP9f/z//n/8//1//f/8f/3//H/+//1//v/+f/3//X/9//1//v/+f/7//n/8//1//P/9f/3//n/9//9//f/+f/3//n/+//9//v/+f/7//X/+//1////+f////nwAA/18AAP9f/z//n/8//1//f/8f/3//H/+//1//v/+f/3//X/9//1//v/+f/7//n/8//1//P/9f/3//n/9/"),
+"format": 34896613399,
+"index_count": 144,
+"index_data": PackedByteArray("AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcAGAAZABoAGAAaABsAHAAdAB4AHAAeAB8AIAAhACIAIAAiACMAJAAlACYAJAAmACcAKAApACoAKAAqACsALAAtAC4ALAAuAC8AMAAxADIAMAAyADMANAA1ADYANAA2ADcAOAA5ADoAOAA6ADsAPAA9AD4APAA+AD8AQABBAEIAQABCAEMARABFAEYARABGAEcASABJAEoASABKAEsATABNAE4ATABOAE8AUABRAFIAUABSAFMAVABVAFYAVABWAFcAWABZAFoAWABaAFsAXABdAF4AXABeAF8A"),
+"material": SubResource("StandardMaterial3D_5141n"),
+"name": "Cube_Double_Barrel_Shotgun_1_Material_2",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 96,
+"vertex_data": PackedByteArray("0Bt6/zBwAAAu5Hr/MHAAAC7kXbgwcAAA0BtduDBwAAAu5F24MHCqKi7kXbgAAKoq0BtduAAAqirQG124MHCqKtAbXbgwcP8/0BtduAAA/z/QG3r/AAD/P9Abev8wcP8/LuR6/wAAAADQG3r/AAAAANAbXbgAAAAALuRduAAAAAAu5Hr/AAAAAC7kXbgAAAAALuRduDBwAAAu5Hr/MHAAANAbev8wcKoq0Bt6/wAAqiou5Hr/AACqKi7kev8wcKoqW4H//57sAAD/////nuwAAP//AACe7AAAW4EAAJ7sAAD//wAAnuyqKv//AACWYqoqW4EAAJZiqipbgQAAnuyqKluBAACe7P8/W4EAAJZi/z9bgf//lmL/P1uB//+e7P8//////5ZiAABbgf//lmIAAFuBAACWYgAA//8AAJZiAAD/////nuwAAP////+WYgAA//8AAJZiAAD//wAAnuwAAFuB//+e7KoqW4H//5Ziqir/////lmKqKv////+e7KoqAAD//57sAACjfv//nuwAAKN+AACe7AAAAAAAAJ7sAACjfgAAnuyqKqN+AACWYqoqAAAAAJZiqioAAAAAnuyqKgAAAACe7P8/AAAAAJZi/z8AAP//lmL/PwAA//+e7P8/o37//5ZiAAAAAP//lmIAAAAAAACWYgAAo34AAJZiAACjfv//nuwAAKN+//+WYgAAo34AAJZiAACjfgAAnuwAAAAA//+e7KoqAAD//5Ziqiqjfv//lmKqKqN+//+e7KoqGnyWEf//AADkg5YR//8AAOSD7AL//wAAGnzsAv//AADkg+wC//+qKuSD7AId6qoqGnzsAh3qqioafOwC//+qKhp87AL///8/GnzsAh3q/z8afJYRHer/Pxp8lhH///8/5IOWER3qAAAafJYRHeoAABp87AId6gAA5IPsAh3qAADkg5YR//8AAOSDlhEd6gAA5IPsAh3qAADkg+wC//8AABp8lhH//6oqGnyWER3qqirkg5YRHeqqKuSDlhH//6oq/3//f/9//3//f/9//3//f6oqVNWqKlTVqipU1aoqVNX/f////3////9/////f///////f////3////9/////f/+//3//v/9//7//f/+//3+qqqqqqqqqqqqqqqqqqqqq/3//f/9//3//f/9//3//f6oqVNWqKlTVqipU1aoqVNX/f////3////9/////f///////f////3////9/////f/+//3//v/9//7//f/+//3+qqqqqqqqqqqqqqqqqqqqq/3//f/9//3//f/9//3//f6oqVNWqKlTVqipU1aoqVNX/f////3////9/////f///////f////3////9/////f/+//3//v/9//7//f/+//3+qqqqqqqqqqqqqqqqqqqqq/3//f/9//3//f/9//3//f6oqVNWqKlTVqipU1aoqVNX/f////3////9/////f///////f////3////9/////f/+//3//v/9//7//f/+//3+qqqqqqqqqqqqqqqqqqqqq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_bc31k")
+
+[node name="Sketchfab_Scene" type="Node3D"]
+
+[node name="Sketchfab_model" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 2.22045e-16, 1, 0, -1, 2.22045e-16, 0, 0, 0)
+
+[node name="Cube Double Barrel Shotgun 1_obj_cleaner_materialmerger_gles" type="Node3D" parent="Sketchfab_model"]
+
+[node name="Object_2" type="MeshInstance3D" parent="Sketchfab_model/Cube Double Barrel Shotgun 1_obj_cleaner_materialmerger_gles"]
+mesh = SubResource("ArrayMesh_0ktlk")
+skeleton = NodePath("")
+
+[node name="Object_3" type="MeshInstance3D" parent="Sketchfab_model/Cube Double Barrel Shotgun 1_obj_cleaner_materialmerger_gles"]
+mesh = SubResource("ArrayMesh_e23ds")
+skeleton = NodePath("")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("1_8w6yl")
+bus = &"Gunshot"
+
+[node name="ReloadPlayer" type="AudioStreamPlayer3D" parent="."]
+bus = &"SFX"
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0036002, 0.053472, 0.891607)

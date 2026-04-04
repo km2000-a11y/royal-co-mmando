@@ -1,0 +1,100 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxs2y18ccneq"]
+
+[ext_resource type="Script" uid="uid://c4bt5a8ppeklj" path="res://Game/Scripts/settings_menu.gd" id="1_svoao"]
+[ext_resource type="FontFile" uid="uid://bb5j4xnyisaky" path="res://Game/Noto_Sans (1)/NotoSans-VariableFont_wdth,wght.ttf" id="2_jttlj"]
+
+[node name="SettingsMenu" type="CanvasLayer"]
+script = ExtResource("1_svoao")
+
+[node name="PanelRoot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 70.0
+offset_bottom = 57.0
+
+[node name="Panel" type="Panel" parent="PanelRoot"]
+layout_mode = 0
+offset_right = 1917.0
+offset_bottom = 1069.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelRoot/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="PanelRoot/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelRoot/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ResolutionRow" type="HBoxContainer" parent="PanelRoot/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelRoot/Panel/VBoxContainer/ResolutionRow"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_jttlj")
+text = "Resolution Scale"
+
+[node name="ResolutionSelector" type="OptionButton" parent="PanelRoot/Panel/VBoxContainer/ResolutionRow"]
+layout_mode = 2
+selected = 2
+item_count = 4
+popup/item_0/text = "25%"
+popup/item_0/id = 0
+popup/item_1/text = "50%"
+popup/item_1/id = 1
+popup/item_2/text = "75%"
+popup/item_2/id = 2
+popup/item_3/text = "100%"
+popup/item_3/id = 3
+
+[node name="VolumeRow" type="HBoxContainer" parent="PanelRoot/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="VolDown" type="Button" parent="PanelRoot/Panel/VBoxContainer/VolumeRow"]
+layout_mode = 2
+text = "-"
+
+[node name="VolUp" type="Button" parent="PanelRoot/Panel/VBoxContainer/VolumeRow"]
+layout_mode = 2
+text = "+"
+
+[node name="VolValue" type="Label" parent="PanelRoot/Panel/VBoxContainer/VolumeRow"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_jttlj")
+text = "Volume: "
+
+[node name="MouseSensRow" type="HBoxContainer" parent="PanelRoot/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="MouseSensSlider" type="HSlider" parent="PanelRoot/Panel/VBoxContainer/MouseSensRow"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+min_value = 0.1
+max_value = 5.0
+step = 0.01
+value = 1.0
+
+[node name="Label" type="Label" parent="PanelRoot/Panel/VBoxContainer/MouseSensRow"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_jttlj")
+text = "Mouse sensitivity:"
+
+[node name="SensValue" type="Label" parent="PanelRoot/Panel/VBoxContainer/MouseSensRow"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_jttlj")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 233.0
+offset_top = 86.0
+offset_right = 308.0
+offset_bottom = 109.0
+
+[connection signal="item_selected" from="PanelRoot/Panel/VBoxContainer/ResolutionRow/ResolutionSelector" to="." method="_on_resolution_selector_item_selected"]
+[connection signal="pressed" from="PanelRoot/Panel/VBoxContainer/VolumeRow/VolDown" to="." method="_on_vol_down_pressed"]
+[connection signal="pressed" from="PanelRoot/Panel/VBoxContainer/VolumeRow/VolUp" to="." method="_on_vol_up_pressed"]
+[connection signal="value_changed" from="PanelRoot/Panel/VBoxContainer/MouseSensRow/MouseSensSlider" to="." method="_on_mouse_sens_slider_value_changed"]

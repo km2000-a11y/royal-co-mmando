@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="Royal Commando"
+config/name="Royal Commando 1.0 \"Vanilla\""
 run/main_scene="uid://dljkh0n7qd2un"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://brhj7q6ef4w6l"
 
 [display]
 
