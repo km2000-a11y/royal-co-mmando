@@ -115,6 +115,17 @@ melee_attack={
 ]
 }
 
+[internationalization]
+
+locale/translation_remaps={
+"res://Game/Translations/en.translation": PackedStringArray("res://Game/Translations/uk.translation:uk", "res://Game/Translations/en.translation:en", "res://Game/Translations/ru.translation:ru", "res://Game/Translations/pl.translation:pl", "res://Game/Translations/sr.translation:sr"),
+"res://Game/Translations/pl.translation": PackedStringArray(),
+"res://Game/Translations/ru.translation": PackedStringArray(),
+"res://Game/Translations/sr.translation": PackedStringArray(),
+"res://Game/Translations/uk.translation": PackedStringArray()
+}
+locale/translations=PackedStringArray("res://Game/Translations/en.translation", "res://Game/Translations/pl.translation", "res://Game/Translations/ru.translation", "res://Game/Translations/uk.translation", "res://Game/Translations/sr.translation")
+
 [physics]
 
 common/physics_ticks_per_second=120
