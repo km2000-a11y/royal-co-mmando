@@ -21,7 +21,6 @@ var master_volume := 1.0
 # IMPORTANT: point these to your actual AudioStreamPlayers
 @onready var gunshot_player: AudioStreamPlayer = $AudioStreamPlayer3D
 @onready var reload_player: AudioStreamPlayer = $ReloadPlayer
-
 # -------------------------
 #  Mouse Sensitivity
 # -------------------------
@@ -132,12 +131,3 @@ func _on_vol_up_pressed() -> void:
 	_apply_master_volume()
 	_update_volume_label()
 	_save_settings(resolution_selector.get_selected_id())
-
-func _on_mouse_sens_slider_value_changed(value: float) -> void:
-	mouse_sens = value
-	_update_sens_label()
-	_save_settings(resolution_selector.get_selected_id())
-
-	var player = get_tree().get_first_node_in_group("Player")
-	if player:
-		player.set_mouse_sens(mouse_sens)

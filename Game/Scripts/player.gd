@@ -7,7 +7,7 @@ const WALK_SPEED := 5.0
 const SPRINT_SPEED := 8.0
 const JUMP_VELOCITY := 4.5
 
-var mouse_sens := 0.1
+# Removed mouse_sens
 var controller_sens := 2.5
 
 # ---------------------------------------------------------
@@ -87,15 +87,7 @@ func _ready():
 	if is_local:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		weapon_index = randi() % weapon_pool.size()
-	
-	if is_local:
-		var cfg := ConfigFile.new()
-		if cfg.load("user://settings.cfg") == OK:
-			mouse_sens=cfg.get_value("input","mouse_sens",0.01)
 
-
-
-		
 	await get_tree().process_frame
 	_spawn_weapon_from_index()
 
@@ -133,8 +125,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		yaw -= deg_to_rad(event.relative.x * mouse_sens)
-		pitch -= deg_to_rad(event.relative.y * mouse_sens)
+		# Fixed sensitivity: no slider, no config, no variable
+		yaw -= deg_to_rad(event.relative.x * 0.5)
+		pitch -= deg_to_rad(event.relative.y * 0.5)
 		pitch = clamp(pitch, deg_to_rad(-40), deg_to_rad(60))
 
 		camera_pivot.rotation.y = yaw
@@ -227,24 +220,15 @@ func receive_weapon(weapon_scene: PackedScene):
 	if weapon_anchor == null:
 		return
 
-	# Remove old weapon
 	for c in weapon_anchor.get_children():
 		c.queue_free()
 
-	# Spawn new weapon
 	var weapon = weapon_scene.instantiate()
 	weapon_anchor.add_child(weapon)
 	weapon.global_transform = weapon_anchor.global_transform
 
-	# HUD update
 	var ui = get_tree().get_nodes_in_group("weapon_name_ui")
 	if ui.size() > 0:
 		ui[0].set_weapon_name(weapon.NAME)
-	print("Weapon:", weapon, "Has NAME:", weapon.has_variable("NAME"))
-
-
-func set_mouse_sens(value: float) -> void:
-	mouse_sens=value
-
-
-	
+	else:
+		ui[0].set_weapon_name("Unknown")
