@@ -230,5 +230,5 @@ func receive_weapon(weapon_scene: PackedScene):
 	var ui = get_tree().get_nodes_in_group("weapon_name_ui")
 	if ui.size() > 0:
 		ui[0].set_weapon_name(weapon.NAME)
-	else:
+	else: if weapon.NAME==null:
 		ui[0].set_weapon_name("Unknown")
