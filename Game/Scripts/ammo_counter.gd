@@ -31,12 +31,12 @@ func update_weapon_connection():
 
 func _on_ammo_updated(current: int, reserve: int):
 	# Only update ammo text if we aren't currently reloading
-	text = "AMMO: " + str(current) + " / " + str(reserve)
+	text = tr("AMMO: " + str(current) + " / " + str(reserve))
 
 # NEW: This handles the "RELOADING..." text
 func _on_reload_status_changed(is_reloading: bool):
 	if is_reloading:
-		text = "RELOADING..."
+		text = tr("RELOADING...")
 	else:
 		# When done reloading, show the new ammo counts
 		if is_instance_valid(current_weapon):

@@ -17,7 +17,7 @@ func _process(delta: float) -> void:
 
 	if _time_accum >= update_interval:
 		var fps := Engine.get_frames_per_second()
-		text = "Frames per second: %d" % fps
+		text = tr("Frames per second: %d" % fps)
 		_update_color(fps)
 		_time_accum = 0.0
 

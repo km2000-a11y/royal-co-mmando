@@ -67,7 +67,6 @@ func _on_host_pressed():
 func _on_join_pressed():
 	var ip = ip_entry.text.strip_edges()
 	if ip == "":
-		ip_entry.text = "Enter IP first"
 		return
 
 	var ws := WebSocketMultiplayerPeer.new()

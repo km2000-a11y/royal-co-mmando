@@ -1,7 +1,7 @@
 extends Label
 
 func _ready() -> void:
-	text = "GPU: " + get_gpu_name()
+	text = tr("GPU: " + get_gpu_name())
 
 
 func get_gpu_name() -> String:

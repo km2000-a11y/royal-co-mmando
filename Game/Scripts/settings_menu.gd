@@ -10,15 +10,34 @@ const SCALES = {
 	3: 1.0
 }
 
-@onready var resolution_selector: OptionButton = $PanelRoot/Panel/VBoxContainer/ResolutionRow/ResolutionSelector
+# -------------------------
+#  Translation files
+# -------------------------
+const LANG_FILES = {
+	"en": "res://Game/Translations/en.translation",
+	"ru": "res://Game/Translations/ru.translation",
+	"pl": "res://Game/Translations/pl.translation",
+	"uk": "res://Game/Translations/uk.translation",
+	"sr": "res://Game/Translations/sr.translation"
+}
+
+var current_language := "en"
 
 # -------------------------
-#  Master Volume (SFX)
+#  UI Nodes
 # -------------------------
-var master_volume := 1.0
+@onready var resolution_selector: OptionButton = $PanelRoot/Panel/VBoxContainer/ResolutionRow/ResolutionSelector
 @onready var volume_label: Label = $PanelRoot/Panel/VBoxContainer/VolumeRow/VolValue
 
-# IMPORTANT: point these to your actual AudioStreamPlayers
+# Language buttons
+@onready var BtnEnglish = $PanelRoot/Panel/VBoxContainer/LangRow/BtnEnglish
+@onready var BtnRussian = $PanelRoot/Panel/VBoxContainer/LangRow/BtnRussian
+@onready var BtnPolish = $PanelRoot/Panel/VBoxContainer/LangRow/BtnPolish
+@onready var BtnUkrainian = $PanelRoot/Panel/VBoxContainer/LangRow/BtnUkrainian
+@onready var BtnSerbian = $PanelRoot/Panel/VBoxContainer/LangRow/BtnSerbian
+
+# Audio
+var master_volume := 1.0
 @onready var gunshot_player: AudioStreamPlayer = $AudioStreamPlayer3D
 @onready var reload_player: AudioStreamPlayer = $ReloadPlayer
 
@@ -30,6 +49,8 @@ func _ready() -> void:
 	_load_settings()
 	_apply_master_volume()
 	_update_volume_label()
+	_apply_translation()
+	_update_ui_texts()
 	hide()
 
 # -------------------------
@@ -37,10 +58,10 @@ func _ready() -> void:
 # -------------------------
 func _populate_resolution_selector() -> void:
 	resolution_selector.clear()
-	resolution_selector.add_item("25% (Lowest)")
-	resolution_selector.add_item("50% (Medium)")
-	resolution_selector.add_item("75% (High)")
-	resolution_selector.add_item("100% (Full)")
+	resolution_selector.add_item("25%")
+	resolution_selector.add_item("50%")
+	resolution_selector.add_item("75%")
+	resolution_selector.add_item("100%")
 
 # -------------------------
 #  Apply internal resolution scale
@@ -58,6 +79,7 @@ func _save_settings(index: int) -> void:
 	var cfg := ConfigFile.new()
 	cfg.set_value("video", "scale_index", index)
 	cfg.set_value("audio", "master_volume", master_volume)
+	cfg.set_value("language", "current_language", current_language)
 	cfg.save("user://settings.cfg")
 
 func _load_settings() -> void:
@@ -70,9 +92,12 @@ func _load_settings() -> void:
 	_apply_resolution_scale(index)
 
 	master_volume = cfg.get_value("audio", "master_volume", 1.0)
+	current_language = cfg.get_value("language", "current_language", "en")
 
 # -------------------------
-func _apply_master_volume()->void:
+#  Apply Master Volume
+# -------------------------
+func _apply_master_volume() -> void:
 	var db := linear_to_db(master_volume)
 	
 	var gunshot_bus = AudioServer.get_bus_index("Gunshot")
@@ -89,7 +114,37 @@ func _apply_master_volume()->void:
 		reload_player.volume_db = db
 
 func _update_volume_label() -> void:
-	volume_label.text = str(round(master_volume * 100)) + "%"
+	volume_label.text = tr(str(round(master_volume * 100))) + "%"
+
+# -------------------------
+#  Translation Logic
+# -------------------------
+func _apply_translation() -> void:
+	if LANG_FILES.has(current_language):
+		TranslationServer.clear()
+		var tr_file = load(LANG_FILES[current_language])
+		if tr_file:
+			TranslationServer.add_translation(tr_file)
+		print("Language applied:", current_language)
+
+# -------------------------
+#  UI TEXT UPDATE (IMPORTANT)
+# -------------------------
+func _update_ui_texts() -> void:
+	# Update all UI text using translation keys
+	BtnEnglish.text = "English"
+	BtnRussian.text = "Русский"
+	BtnPolish.text = "Polska"
+	BtnUkrainian.text = "Українська"
+	BtnSerbian.text = "Српски"
+
+	# Example: if you have labels like "Volume", "Resolution", etc.
+	$PanelRoot/Panel/VBoxContainer/VolumeRow/VolValue.text = tr("Volume:")
+	$PanelRoot/Panel/VBoxContainer/ResolutionRow/Label.text = tr("Resolution Scale")
+	$PanelRoot/Panel/VBoxContainer/Label.text=tr("Settings")
+	
+
+	_update_volume_label()
 
 # -------------------------
 #  UI Signals
@@ -109,3 +164,18 @@ func _on_vol_up_pressed() -> void:
 	_apply_master_volume()
 	_update_volume_label()
 	_save_settings(resolution_selector.get_selected_id())
+
+# -------------------------
+#  Language Button Signals
+# -------------------------
+func _set_language(lang: String) -> void:
+	current_language = lang
+	_apply_translation()
+	_update_ui_texts()
+	_save_settings(resolution_selector.get_selected_id())
+
+func _on_btn_english_pressed() -> void: _set_language("en")
+func _on_btn_russian_pressed() -> void: _set_language("ru")
+func _on_btn_ukrainian_pressed() -> void: _set_language("uk")
+func _on_btn_polish_pressed() -> void: _set_language("pl")
+func _on_btn_serbian_pressed() -> void: _set_language("sr")
