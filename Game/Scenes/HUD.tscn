@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://cr3jcyli0yhhk"]
+
+[ext_resource type="FontFile" uid="uid://bb5j4xnyisaky" path="res://Game/Noto_Sans (1)/NotoSans-VariableFont_wdth,wght.ttf" id="1_fyaff"]
+[ext_resource type="Script" uid="uid://djw3jm4pmenio" path="res://Game/Scripts/ammo_counter.gd" id="1_ne771"]
+[ext_resource type="Script" uid="uid://kt7egwv2wr0l" path="res://Game/Scripts/cpu_label.gd" id="3_uhlic"]
+[ext_resource type="Script" uid="uid://6ml8n0gqfnn4" path="res://Game/Scripts/gpu_name.gd" id="4_23typ"]
+[ext_resource type="Script" uid="uid://b1hvynu6hllut" path="res://Game/Scripts/weapon_name_label.gd" id="6_fyaff"]
+[ext_resource type="Script" uid="uid://behjcpp8utw0b" path="res://Game/Scripts/fps_label.gd" id="6_qr6w0"]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AmmoCounter" type="Label" parent="Control" groups=["ammo_ui", "weapon"]]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 4.0
+anchor_bottom = 1.625
+theme_override_fonts/font = ExtResource("1_fyaff")
+theme_override_font_sizes/font_size = 16
+text = "Ammo:"
+script = ExtResource("1_ne771")
+
+[node name="CPULabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_top = 68.0
+offset_right = 136.0
+offset_bottom = 94.0
+theme_override_fonts/font = ExtResource("1_fyaff")
+text = "CPU:"
+script = ExtResource("3_uhlic")
+
+[node name="GPUName" type="Label" parent="Control"]
+layout_mode = 0
+offset_top = 140.0
+offset_right = 163.0
+offset_bottom = 186.0
+theme_override_fonts/font = ExtResource("1_fyaff")
+text = "GPU:"
+script = ExtResource("4_23typ")
+
+[node name="WeaponNameLabel" type="Label" parent="Control" groups=["weapon_name_ui"]]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 672.0
+offset_right = 319.0
+offset_bottom = 717.0
+theme_override_fonts/font = ExtResource("1_fyaff")
+text = "Weapon:"
+script = ExtResource("6_fyaff")
+
+[node name="TimerLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 896.0
+offset_right = 1121.0
+offset_bottom = 128.0
+theme_override_fonts/font = ExtResource("1_fyaff")
+text = "Time remaining:"
+
+[node name="FPSLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_top = 176.0
+offset_right = 155.0
+offset_bottom = 223.0
+theme_override_fonts/font = ExtResource("1_fyaff")
+text = "Frames per second: "
+script = ExtResource("6_qr6w0")
