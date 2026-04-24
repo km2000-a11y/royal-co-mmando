@@ -1,3 +1,4 @@
+#Hi
 extends Node
 
 signal language_changed
