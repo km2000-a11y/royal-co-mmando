@@ -513,7 +513,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_g3xhm")
 
 [node name="Sketchfab_Scene" type="Node3D" groups=["ammo_ui", "weapon"]]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("1_tnovi")
 NAME = "Magnum Bullpup"
 COUNTRY_OF_ORIGIN = "Austria"

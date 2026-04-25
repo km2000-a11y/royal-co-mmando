@@ -355,6 +355,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_4otpb")
 
 [node name="Sketchfab_Scene" type="Node3D" groups=["weapon"]]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("1_vneyt")
 DAMAGE = 80
 RANGE = 50.0
