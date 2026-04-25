@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://0ts742j4l6he"]
+[gd_scene load_steps=34 format=3 uid="uid://0ts742j4l6he"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3plhk"]
 size = Vector3(100, 1, 160)
@@ -95,6 +95,9 @@ size = Vector3(0.3, 3.4, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ybhy5"]
 size = Vector3(0.3, 3.4, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_r2ou1"]
+size = Vector3(0.3, 1, 1)
 
 [node name="A320" type="Node3D"]
 
@@ -293,3 +296,10 @@ mesh = SubResource("BoxMesh_r88na")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D14/StaticBody3D"]
 shape = SubResource("BoxShape3D_ybhy5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17627, 0)
+mesh = SubResource("BoxMesh_r2ou1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
