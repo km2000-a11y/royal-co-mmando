@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbx6d02hocfkp"]
+
+[ext_resource type="Script" uid="uid://ci02hfho07kgi" path="res://hardware_checker.gd" id="1_maudw"]
+[ext_resource type="FontFile" uid="uid://bb5j4xnyisaky" path="res://Game/Noto_Sans (1)/NotoSans-VariableFont_wdth,wght.ttf" id="2_0rqoc"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_maudw")
+
+[node name="HardwareWarner" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HardwareWarner"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("2_0rqoc")
