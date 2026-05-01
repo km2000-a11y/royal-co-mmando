@@ -3,6 +3,9 @@ extends Node
 const MIN_THREADS := 4
 const MIN_RAM_GB := 8
 
+# The ONLY allowed 2-core / 2-thread CPU
+const ALLOWED_2C2T_CPU := "Intel(R) Celeron(R) G6900"
+
 const BLOCKED_GPUS := [
 	"Intel(R) HD Graphics 2000",
 	"Intel(R) HD Graphics 2500",
@@ -24,9 +27,6 @@ const BLOCKED_GPUS := [
 	"Radeon HD 8350"
 ]
 
-# -----------------------------------------
-# Top-level variable EXACTLY how you want it
-# -----------------------------------------
 @onready var warner: Label = $HardwareWarner/Label
 
 
@@ -40,16 +40,26 @@ func _ready():
 
 func _hardware_ok() -> bool:
 	var threads: int = OS.get_processor_count()
-	if threads < MIN_THREADS:
-		return false
 
+	# --- CPU THREAD CHECK WITH G6900 EXCEPTION ---
+	if threads < MIN_THREADS:
+		var cpu_name := OS.get_processor_name()
+
+		# Allow ONLY the G6900 if it's 2/2
+		if cpu_name.findn(ALLOWED_2C2T_CPU) != -1:
+			# G6900 is allowed even though it's 2/2
+			pass
+		else:
+			return false
+
+	# --- RAM CHECK ---
 	var mem_info := OS.get_memory_info()
 	var ram_gb: float = float(mem_info.physical) / (1024.0 * 1024.0 * 1024.0)
 	if ram_gb < MIN_RAM_GB:
 		return false
 
+	# --- GPU CHECK ---
 	var gpu_name: String = RenderingServer.get_video_adapter_name()
-
 	for bad in BLOCKED_GPUS:
 		if gpu_name.findn(bad) != -1:
 			return false
@@ -63,12 +73,8 @@ func _show_block_message():
 
 	get_tree().root.add_child(inst)
 
-	# -----------------------------------------
-	# Assign the top-level variable using `$`
-	# -----------------------------------------
 	warner = inst.warner
-
-	# Now you can use inst.node
 	warner.text = Localization.L("UNSUPPORTED_HARDWARE_MESSAGE")
 
 	get_tree().paused = true
+	

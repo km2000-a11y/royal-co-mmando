@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://0ts742j4l6he"]
+[gd_scene load_steps=72 format=3 uid="uid://0ts742j4l6he"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3plhk"]
 size = Vector3(100, 1, 160)
@@ -207,6 +207,8 @@ size = Vector3(8, 15, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6avyn"]
 size = Vector3(8, 15, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2jish"]
 
 [node name="A320" type="Node3D"]
 
@@ -1215,3 +1217,6 @@ mesh = SubResource("BoxMesh_il285")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D63/StaticBody3D"]
 shape = SubResource("BoxShape3D_6avyn")
+
+[node name="MeshInstance3D94" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_2jish")
