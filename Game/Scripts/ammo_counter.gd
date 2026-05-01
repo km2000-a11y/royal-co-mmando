@@ -26,7 +26,7 @@ func update_weapon_connection():
 		
 		_update_text()
 	else:
-		text = "MELEE"  # do NOT localize
+		text = "MELEE"  # do NOT localized
 
 func _update_text():
 	if is_instance_valid(current_weapon):
