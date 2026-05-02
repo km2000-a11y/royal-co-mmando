@@ -71,7 +71,7 @@ emoji_menu_enabled = false
 [node name="SettingsMenu" parent="." instance=ExtResource("7_a4cly")]
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 300.0
+wait_time = 15.0
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("../Map")
