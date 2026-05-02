@@ -93,4 +93,10 @@ func _spawn_players_remote(ids: Array[int]):
 		map.spawn_player(id)
 
 func _on_timer_timeout() -> void:
-	get_tree().quit()
+	game_started=false
+	ready_clients.clear()
+	lan_ui.visible=true
+	map.visible=false
+	
+	if lan_ui.has_method("_on_returned_to_menu"):
+		lan_ui._on_returned_to_menu()
